@@ -1,8 +1,14 @@
 window.PORTFOLIO_DATA = {
-  contact: {
-    label: "Connect on LinkedIn",
-    url: "https://www.linkedin.com/in/vitaly-matsevich/"
-  },
+  contacts: [
+    {
+      label: "Email Vitaly",
+      url: "mailto:vitalymatsevich@gmail.com"
+    },
+    {
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/in/vitaly-matsevich/"
+    }
+  ],
   projects: [
     {
       number: "A",

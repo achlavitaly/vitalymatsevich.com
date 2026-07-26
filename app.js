@@ -37,9 +37,17 @@ projectsRoot.innerHTML = data.projects.filter((project) => project.status === "p
   `;
 }).join("");
 
-if (data.contact.url && data.contact.label) {
+const contacts = (data.contacts || []).filter((contact) => contact.url && contact.label);
+
+if (contacts.length) {
   document.querySelector("[data-contact]").innerHTML = `
-    <a class="primary-action" href="${data.contact.url}">${data.contact.label}${externalIcon}</a>
+    <div class="contact-links">
+      ${contacts.map((contact) => `
+        <a class="primary-action" href="${contact.url}"${contact.url.startsWith("http") ? ' target="_blank" rel="noreferrer"' : ""}>
+          ${contact.label}${externalIcon}
+        </a>
+      `).join("")}
+    </div>
   `;
 }
 

@@ -691,6 +691,12 @@ h1 span {
   background: var(--ink);
 }
 
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 footer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
