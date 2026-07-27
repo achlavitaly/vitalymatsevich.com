@@ -19,6 +19,9 @@ window.PORTFOLIO_DATA = {
       problem: "Build and scale a print-on-demand business while keeping product quality, order execution, and customer trust connected across several platforms.",
       system: ["Niche and product research", "Catalog and listing production", "Fulfillment and support workflows", "Pricing and profitability control"],
       evidence: "5,000+ sales · 5.0 rating · ≈1,500 reviews · zero Etsy cases in a verified group of 751 orders.",
+      evidenceImage: "assets/teezaro-evidence.png",
+      evidenceImageAlt: "Teezaro Etsy Shop Manager showing 5,056 sales, a 5.0 rating from 1,486 reviews, and year-to-date shop performance.",
+      evidenceCaption: "Live Etsy Shop Manager evidence · Teezaro · 5,056 sales · 1,486 reviews",
       href: "https://teezaro.etsy.com/",
       linkLabel: "Visit Etsy shop",
       tone: "copper"

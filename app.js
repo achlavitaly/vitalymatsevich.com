@@ -13,6 +13,12 @@ projectsRoot.innerHTML = data.projects.filter((project) => project.status === "p
          ${project.linkLabel}${externalIcon}
        </a>`
     : "";
+  const evidenceImage = project.evidenceImage
+    ? `<figure class="project-evidence">
+         <img src="${project.evidenceImage}" alt="${project.evidenceImageAlt || ""}" loading="lazy">
+         ${project.evidenceCaption ? `<figcaption>${project.evidenceCaption}</figcaption>` : ""}
+       </figure>`
+    : "";
 
   return `
     <article class="project project--${project.tone}">
@@ -33,6 +39,7 @@ projectsRoot.innerHTML = data.projects.filter((project) => project.status === "p
         <p><span class="field-label">Evidence</span>${project.evidence}</p>
         ${projectLink}
       </div>
+      ${evidenceImage}
     </article>
   `;
 }).join("");

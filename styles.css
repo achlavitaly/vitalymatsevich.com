@@ -519,6 +519,28 @@ h1 span {
   color: var(--project-color);
 }
 
+.project-evidence {
+  grid-column: 2 / -1;
+  margin: 32px 0 0;
+}
+
+.project-evidence img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  filter: saturate(0.78) contrast(1.04);
+}
+
+.project-evidence figcaption {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
 .method-section {
   display: grid;
   grid-template-columns: 0.42fr 0.58fr;
@@ -902,7 +924,8 @@ footer a {
   .project-heading,
   .project-summary,
   .project-system,
-  .project-foot {
+  .project-foot,
+  .project-evidence {
     grid-column: 2;
   }
 
