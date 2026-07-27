@@ -6,7 +6,7 @@
     <title>Open Graph card source, 1200x630</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
     <style>
       /* Source for assets/og-card.jpg. Rendered by headless Chrome at exactly
          1200x630, then encoded to JPEG. See README for the command. */
@@ -33,7 +33,7 @@
         height: 630px;
         overflow: hidden;
         color: var(--paper);
-        font-family: "Manrope", sans-serif;
+        font-family: "IBM Plex Sans", sans-serif;
         -webkit-font-smoothing: antialiased;
         background:
           radial-gradient(circle at 88% 4%, rgba(215, 138, 74, 0.10), transparent 27rem),
@@ -62,18 +62,19 @@
       .eyebrow {
         margin: 0 0 26px;
         color: var(--signal);
-        font-size: 17px;
-        font-weight: 700;
-        letter-spacing: 0.11em;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
       }
 
       .name {
         margin: 0;
-        font-family: "Unbounded", sans-serif;
-        font-size: 66px;
+        font-family: "Frank Ruhl Libre", serif;
+        font-size: 78px;
         font-weight: 500;
-        letter-spacing: -0.04em;
+        letter-spacing: -0.015em;
         line-height: 1;
       }
 
@@ -109,15 +110,17 @@
 
       .proof dt {
         color: var(--muted);
-        font-size: 15px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        letter-spacing: 0.06em;
       }
 
       .proof dd {
-        margin: 6px 0 0;
-        font-family: "Unbounded", sans-serif;
-        font-size: 34px;
+        margin: 8px 0 0;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 31px;
         font-weight: 500;
-        letter-spacing: -0.04em;
+        letter-spacing: -0.02em;
       }
 
       .proof dd span {
@@ -127,8 +130,9 @@
       .site {
         margin: 40px 0 0;
         color: var(--muted);
-        font-size: 16px;
-        letter-spacing: 0.02em;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 15px;
+        letter-spacing: 0.04em;
       }
 
       /* figure carries default UA margins, which otherwise inset the photo

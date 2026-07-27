@@ -10,6 +10,17 @@ if (header) {
   window.addEventListener("scroll", updateHeader, { passive: true });
 }
 
+// The lifecycle dial loops forever, so park it whenever it is off screen.
+// It runs by default: if this script never arrives, the diagram still moves.
+const systemMap = document.querySelector(".system-map");
+if (systemMap) {
+  new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      systemMap.toggleAttribute("data-paused", !entry.isIntersecting);
+    });
+  }).observe(systemMap);
+}
+
 if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {

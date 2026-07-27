@@ -3,6 +3,7 @@
   --ink: #11110f;
   --ink-raised: #191917;
   --paper: #eee9dc;
+  --paper-dim: #c5c0b4;
   --muted: #aaa69b;
   --line: #393732;
   --signal: #d78a4a;
@@ -12,6 +13,20 @@
   --plum: #b39aae;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --content: min(100% - 40px, 1460px);
+
+  /* Three voices, one job each. The serif makes the claim, the sans explains
+     it, and the mono is reserved for things that are measured: metrics, field
+     labels, indices, diagram nodes. Mono never sets prose. */
+  --font-display: "Frank Ruhl Libre", Georgia, serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Notation scale. The old file had 30 ad-hoc sizes between 0.53 and 1rem,
+     many separated by 0.01rem and none perceptually distinct. Four steps. */
+  --t-micro: 0.68rem;
+  --t-note: 0.76rem;
+  --t-dense: 0.9rem;
+  --t-body: 1.02rem;
 }
 
 * {
@@ -29,7 +44,7 @@ body {
   background:
     radial-gradient(circle at 88% 4%, rgba(215, 138, 74, 0.08), transparent 27rem),
     var(--ink);
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -105,9 +120,10 @@ a:focus-visible {
   height: 31px;
   place-items: center;
   border: 1px solid var(--paper);
-  font-family: "Unbounded", sans-serif;
-  font-size: 0.55rem;
-  letter-spacing: -0.03em;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .site-nav {
@@ -137,7 +153,10 @@ main {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.42fr) minmax(360px, 0.58fr);
+  /* The dial's labels sit outside its rings, so its column has to be wider
+     than the dial itself. At the old 0.58fr the easternmost label ran past
+     the content edge and was silently cut by main's overflow clip. */
+  grid-template-columns: minmax(0, 1.3fr) minmax(380px, 0.7fr);
   grid-template-rows: 1fr;
   width: var(--content);
   min-height: max(760px, 100svh);
@@ -158,9 +177,10 @@ main {
 .contact-section > p:first-child {
   margin: 0 0 28px;
   color: var(--signal);
-  font-size: 0.71rem;
-  font-weight: 700;
-  letter-spacing: 0.11em;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
@@ -174,11 +194,11 @@ p {
 h1 {
   max-width: 1040px;
   margin: 0;
-  font-family: "Unbounded", sans-serif;
-  font-size: clamp(3.25rem, 4.45vw, 4rem);
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 5.2vw, 5rem);
   font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 0.99;
+  letter-spacing: -0.015em;
+  line-height: 1.01;
 }
 
 h1 span {
@@ -188,7 +208,7 @@ h1 span {
 .hero-lede {
   max-width: 680px;
   margin: 38px 0 30px;
-  color: #c5c0b4;
+  color: var(--paper-dim);
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   line-height: 1.65;
 }
@@ -201,9 +221,11 @@ h1 span {
   gap: 12px;
   align-items: center;
   min-height: 44px;
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: var(--t-note);
+  font-weight: 600;
+  letter-spacing: 0.01em;
   text-decoration: none;
+  transition: transform 140ms var(--ease-out), color 160ms ease;
 }
 
 .text-action svg,
@@ -234,7 +256,10 @@ h1 span {
 .system-map {
   position: relative;
   align-self: center;
-  width: min(100%, 520px);
+  /* Reserve room in the column for the labels that ride outside the rings,
+     otherwise the easternmost one is clipped at narrower desktop widths. */
+  width: min(100% - 140px, 340px);
+  margin-inline: auto;
   aspect-ratio: 1;
   border: 1px solid var(--line);
   border-radius: 50%;
@@ -266,13 +291,17 @@ h1 span {
 
 .map-core span {
   color: var(--muted);
-  font-size: 0.63rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.04em;
 }
 
 .map-core strong {
   color: var(--signal);
-  font-family: "Unbounded", sans-serif;
-  font-size: clamp(0.9rem, 1.4vw, 1.3rem);
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 1.25vw, 1.15rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .system-map ol {
@@ -308,8 +337,89 @@ h1 span {
   top: -8px;
   right: 20px;
   color: var(--muted);
-  font-size: 0.66rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.04em;
   transform: rotate(calc(var(--i) * -51.43deg));
+}
+
+/* ---------------------------------------------------------------------------
+   The lifecycle dial.
+
+   This diagram is the page's argument, not an ornament, so it gets the one
+   authored moment on the site. Two ruled tick bands drift in opposite
+   directions at instrument speed, and a copper signal walks the seven stages
+   in order, so the thing reads as a cycle that is running rather than a
+   labelled circle. Nothing here moves layout: only transform, colour and
+   shadow, on elements that already exist.
+
+   --stage is one step of the signal; the full lap is seven stages. Each node
+   is offset by its own --i, which is why the pulse travels instead of
+   flashing everywhere at once.
+--------------------------------------------------------------------------- */
+.system-map {
+  --stage: 0.62s;
+  --lap: calc(var(--stage) * 7);
+}
+
+.dial {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  animation: dial-turn 90s linear infinite;
+}
+
+/* A tick band is a fine conic comb masked down to a narrow ring, which keeps
+   it one compositable element instead of dozens of positioned marks. */
+.dial--outer {
+  inset: 0;
+  background: repeating-conic-gradient(from 0deg, var(--line) 0deg 0.32deg, transparent 0.32deg 5deg);
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 9px), #000 calc(100% - 9px));
+  mask: radial-gradient(closest-side, transparent calc(100% - 9px), #000 calc(100% - 9px));
+}
+
+.dial--inner {
+  inset: 12%;
+  background: repeating-conic-gradient(from 0deg, var(--signal-dark) 0deg 0.7deg, transparent 0.7deg 15deg);
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
+  mask: radial-gradient(closest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
+  animation-duration: 130s;
+  animation-direction: reverse;
+}
+
+@keyframes dial-turn {
+  to { transform: rotate(360deg); }
+}
+
+.system-map li::before {
+  animation: node-signal var(--lap) var(--ease-out) infinite;
+  animation-delay: calc(var(--i) * var(--stage));
+}
+
+.system-map li span {
+  animation: node-label var(--lap) var(--ease-out) infinite;
+  animation-delay: calc(var(--i) * var(--stage));
+}
+
+@keyframes node-signal {
+  0% { transform: scale(1); box-shadow: 0 0 0 1px var(--signal); }
+  6% { transform: scale(1.8); box-shadow: 0 0 0 1px var(--signal), 0 0 15px 3px rgba(215, 138, 74, 0.5); }
+  26%, 100% { transform: scale(1); box-shadow: 0 0 0 1px var(--signal); }
+}
+
+@keyframes node-label {
+  0% { color: var(--muted); }
+  6% { color: var(--paper); }
+  26%, 100% { color: var(--muted); }
+}
+
+/* Offscreen the loop is pointless work, so app.js parks it. Defaulting to
+   running means a failed script costs animation, never a broken diagram. */
+.system-map[data-paused] .dial,
+.system-map[data-paused] li::before,
+.system-map[data-paused] li span {
+  animation-play-state: paused;
 }
 
 .proof-strip {
@@ -340,14 +450,18 @@ h1 span {
 
 .proof-strip dt {
   color: var(--muted);
-  font-size: 0.63rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
 }
 
 .proof-strip dd {
   margin: 5px 0 0;
-  font-family: "Unbounded", sans-serif;
-  font-size: clamp(1.35rem, 2vw, 2.3rem);
-  letter-spacing: -0.04em;
+  font-family: var(--font-mono);
+  font-size: clamp(1.3rem, 1.85vw, 2.1rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .proof-strip dd span {
@@ -379,11 +493,11 @@ h1 span {
 .about-title h2 {
   max-width: 800px;
   margin: 0;
-  font-family: "Unbounded", sans-serif;
-  font-size: clamp(2.4rem, 4.3vw, 4.9rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 4.8vw, 5.4rem);
   font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 1.03;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
 }
 
 .section-intro > p:last-child {
@@ -429,25 +543,29 @@ h1 span {
 
 .project-index {
   color: var(--project-color);
-  font-family: "Unbounded", sans-serif;
-  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-dense);
+  font-weight: 500;
 }
 
 .project-heading p {
   min-height: 36px;
   margin: 0 0 30px;
   color: var(--muted);
-  font-size: 0.66rem;
-  line-height: 1.45;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
+  line-height: 1.6;
   text-transform: uppercase;
 }
 
 .project-heading h3 {
   margin: 0 0 10px;
-  font-family: "Unbounded", sans-serif;
-  font-size: clamp(2rem, 3.5vw, 4rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.9vw, 4.4rem);
   font-weight: 500;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
 }
 
 .project-heading strong {
@@ -459,7 +577,7 @@ h1 span {
 .project-summary {
   max-width: 390px;
   margin: 66px 0 0;
-  color: #c5c0b4;
+  color: var(--paper-dim);
   font-size: 0.9rem;
   line-height: 1.7;
 }
@@ -507,9 +625,10 @@ h1 span {
   display: block;
   margin-bottom: 12px;
   color: var(--project-color, var(--signal));
-  font-size: 0.61rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -533,9 +652,10 @@ h1 span {
 .project-evidence figcaption {
   margin-top: 12px;
   color: var(--muted);
-  font-size: 0.62rem;
-  letter-spacing: 0.07em;
-  line-height: 1.5;
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
   text-transform: uppercase;
 }
 
@@ -572,15 +692,18 @@ h1 span {
 
 .method-track span {
   color: var(--signal);
-  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-note);
+  font-weight: 500;
 }
 
 .method-track h3 {
   margin: 0;
-  font-family: "Unbounded", sans-serif;
-  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
   font-weight: 500;
-  line-height: 1.25;
+  letter-spacing: -0.01em;
+  line-height: 1.18;
 }
 
 .method-track p {
@@ -619,7 +742,7 @@ h1 span {
   padding: 13px 18px;
   border: 1px solid var(--line);
   margin: -1px 0 0 -1px;
-  color: #c5c0b4;
+  color: var(--paper-dim);
   font-size: 0.82rem;
 }
 
@@ -661,7 +784,7 @@ h1 span {
 
 .about-copy p {
   margin: 0 0 28px;
-  color: #c5c0b4;
+  color: var(--paper-dim);
   font-size: clamp(1rem, 1.35vw, 1.25rem);
   line-height: 1.75;
 }
@@ -685,11 +808,11 @@ h1 span {
 .contact-section h2 {
   max-width: 1200px;
   margin: 0;
-  font-family: "Unbounded", sans-serif;
-  font-size: clamp(2.5rem, 5.5vw, 6rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 5.8vw, 6rem);
   font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 1.02;
+  letter-spacing: -0.015em;
+  line-height: 1.01;
 }
 
 .contact-section > p:not(:first-child) {
@@ -840,6 +963,18 @@ footer a {
     grid-template-columns: 1fr;
   }
 
+  /* Once the about grid is a single column the portrait has no width limit,
+     and a fixed height would letterbox a square source to roughly 892x380.
+     Cap the width and let the 4:5 ratio drive the height instead. */
+  .portrait {
+    width: min(52vw, 360px);
+    margin: 46px 0 0;
+  }
+
+  .portrait img {
+    height: auto;
+  }
+
   .method-heading {
     position: static;
   }
@@ -889,26 +1024,40 @@ footer a {
     font-size: 0.97rem;
   }
 
+  /* Labels ride outside the rings, so the circle cannot simply fill the phone:
+     the widest label ("Fulfillment") needs its own margin beyond the ring or it
+     gets clipped, which is what used to happen. Sizing the dial to leave that
+     margin is what keeps every stage readable. */
   .system-map {
-    width: min(92vw, 420px);
+    width: min(60vw, 230px);
+    margin: 34px auto 92px;
   }
 
   .system-map li span {
-    right: 14px;
-    font-size: 0.56rem;
+    right: 0;
+    font-size: 0.6rem;
   }
 
-  .proof-strip {
-    grid-template-columns: repeat(3, 1fr);
+  .system-map li::before {
+    width: 7px;
+    height: 7px;
   }
 
-  .proof-strip div,
-  .proof-strip div:first-child,
-  .proof-strip div:last-child {
+  /* Keep the outer cells flush with the column and drop the trailing rule.
+     The old group selector re-armed border-right on :last-child, leaving a
+     vertical line dangling off the right edge with nothing after it. */
+  .proof-strip div {
     min-height: 76px;
-    padding: 12px 8px;
-    border-right: 1px solid var(--line);
-    border-bottom: 0;
+    padding: 12px 10px;
+  }
+
+  .proof-strip div:first-child {
+    padding-left: 0;
+  }
+
+  .proof-strip div:last-child {
+    padding-right: 0;
+    border-right: 0;
   }
 
   .proof-strip dd {
@@ -991,13 +1140,15 @@ footer a {
     gap: 18px;
   }
 
+  /* margin-left: auto used to shove this against the right edge of a
+     single-column grid, which read as a mistake next to left-aligned copy. */
   .portrait {
     width: min(76vw, 330px);
-    margin: 38px 0 12px auto;
+    margin: 38px auto 12px;
   }
 
   .portrait img {
-    height: 420px;
+    height: auto;
   }
 
   .about-copy {
@@ -1027,6 +1178,9 @@ footer a {
   *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
+    /* Without this a staggered delay still holds elements in their start
+       state for the full stagger, which is the thing being opted out of. */
+    animation-delay: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
