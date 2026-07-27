@@ -5,6 +5,10 @@ window.PORTFOLIO_DATA = {
       url: "mailto:vitalymatsevich@gmail.com"
     },
     {
+      label: "WhatsApp",
+      url: "https://wa.me/972584443909"
+    },
+    {
       label: "LinkedIn",
       url: "https://www.linkedin.com/in/vitaly-matsevich/"
     }
@@ -22,8 +26,8 @@ window.PORTFOLIO_DATA = {
       evidenceImage: "assets/teezaro-evidence.png",
       evidenceImageAlt: "Teezaro Etsy Shop Manager showing 5,056 sales, a 5.0 rating from 1,486 reviews, and year-to-date shop performance.",
       evidenceCaption: "Live Etsy Shop Manager evidence · Teezaro · 5,056 sales · 1,486 reviews",
-      href: "https://teezaro.etsy.com/",
-      linkLabel: "Visit Etsy shop",
+      href: "",
+      linkLabel: "",
       tone: "copper"
     },
     {
