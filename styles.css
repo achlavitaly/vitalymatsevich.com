@@ -135,6 +135,7 @@ a:focus-visible {
 .location {
   color: var(--muted);
   font-size: 0.75rem;
+  letter-spacing: 0.06em;
   text-decoration: none;
   transition: color 160ms ease;
 }
@@ -191,7 +192,7 @@ main {
   font-family: var(--font-mono);
   font-size: var(--t-micro);
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
@@ -234,7 +235,7 @@ h1 span {
   min-height: 44px;
   font-size: var(--t-note);
   font-weight: 600;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.05em;
   text-decoration: none;
   transition: transform 140ms var(--ease-out), color 160ms ease;
 }
@@ -269,7 +270,7 @@ h1 span {
   align-self: center;
   /* Reserve room in the column for the labels that ride outside the rings,
      otherwise the easternmost one is clipped at narrower desktop widths. */
-  width: min(100% - 140px, 340px);
+  width: min(100% - 210px, 280px);
   margin-inline: auto;
   aspect-ratio: 1;
   border: 1px solid var(--line);
@@ -304,7 +305,8 @@ h1 span {
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: var(--t-micro);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
 }
 
 .map-core strong {
@@ -328,8 +330,15 @@ h1 span {
   top: 50%;
   left: 50%;
   width: 50%;
-  transform: rotate(calc(var(--i) * 51.43deg)) translateX(50%);
+  /* 76% of the li's half-width ray lands the dot exactly on the middle ring
+     (inset 12% -> radius 0.38W), so the seven nodes read as marks on a line
+     instead of floating between rings. */
+  transform: rotate(calc(var(--i) * 51.43deg)) translateX(76%);
   transform-origin: left center;
+}
+
+.system-map li::before {
+  margin-inline-start: -4px;
 }
 
 .system-map li::before {
@@ -346,12 +355,17 @@ h1 span {
 .system-map li span {
   position: absolute;
   top: -8px;
-  right: 20px;
+  /* Anchor just outside the outer ring along the ray. The counter-rotation
+     spins the label back level around its own centre, which by itself leaves
+     east labels overlapping the circle and west labels detached; the cos/sin
+     nudge resolves each label away from the ring on its own side. */
+  left: calc(24% + 12px);
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: var(--t-micro);
-  letter-spacing: 0.04em;
-  transform: rotate(calc(var(--i) * -51.43deg));
+  letter-spacing: 0.06em;
+  transform: rotate(calc(var(--i) * -51.43deg))
+    translate(calc(cos(var(--i) * 51.43deg) * 10px), calc(sin(var(--i) * 51.43deg) * 10px));
 }
 
 /* ---------------------------------------------------------------------------
@@ -378,7 +392,10 @@ h1 span {
   border-radius: 50%;
   pointer-events: none;
   will-change: transform;
-  animation: dial-turn 90s linear infinite;
+  /* Driven by scroll, not by a clock: app.js feeds --dial-turn from scrollY,
+     so the instrument responds to the reader instead of idling. With scripts
+     or motion off the bands simply hold still. */
+  transform: rotate(var(--dial-turn, 0deg));
 }
 
 /* A tick band is a fine conic comb masked down to a narrow ring, which keeps
@@ -391,16 +408,11 @@ h1 span {
 }
 
 .dial--inner {
-  inset: 12%;
+  inset: 29%;
   background: repeating-conic-gradient(from 0deg, var(--signal-dark) 0deg 0.7deg, transparent 0.7deg 15deg);
   -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
   mask: radial-gradient(closest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
-  animation-duration: 130s;
-  animation-direction: reverse;
-}
-
-@keyframes dial-turn {
-  to { transform: rotate(360deg); }
+  transform: rotate(calc(var(--dial-turn, 0deg) * -0.6));
 }
 
 .system-map li::before {
@@ -639,7 +651,7 @@ h1 span {
   font-family: var(--font-mono);
   font-size: var(--t-micro);
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
@@ -728,8 +740,6 @@ h1 span {
   display: grid;
   grid-template-columns: 0.35fr 0.65fr;
   gap: 90px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
 }
 
 .capabilities h2 {
@@ -737,24 +747,42 @@ h1 span {
   margin: 0;
   font-size: 0.95rem;
   font-weight: 600;
+  letter-spacing: 0.04em;
   line-height: 1.5;
 }
 
 .capabilities ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: clamp(48px, 6vw, 110px);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* A numbered index, not a tag cloud. Every entry sits on its own rule with a
+   mono ordinal, so the list reads as a contents page rather than a pile of
+   boxes wrapping wherever the line happens to break. */
 .capabilities li {
-  padding: 13px 18px;
-  border: 1px solid var(--line);
-  margin: -1px 0 0 -1px;
+  display: flex;
+  gap: 18px;
+  align-items: baseline;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
   color: var(--paper-dim);
-  font-size: 0.82rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+.capabilities li:nth-child(-n + 2) {
+  border-top: 1px solid var(--line);
+}
+
+.capabilities li span {
+  color: var(--signal);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.08em;
 }
 
 .about-section {
@@ -930,7 +958,7 @@ footer a {
   }
 
   .system-map {
-    width: min(82vw, 520px);
+    width: min(56vw, 320px);
     margin: 20px auto 90px;
   }
 
@@ -1042,7 +1070,7 @@ footer a {
      gets clipped, which is what used to happen. Sizing the dial to leave that
      margin is what keeps every stage readable. */
   .system-map {
-    width: min(60vw, 230px);
+    width: min(48vw, 190px);
     margin: 34px auto 92px;
   }
 
@@ -1149,6 +1177,20 @@ footer a {
     gap: 42px;
   }
 
+  /* One column on phones: the second grid column would otherwise keep its
+     top border pair mid-list. */
+  .capabilities ul {
+    grid-template-columns: 1fr;
+  }
+
+  .capabilities li:nth-child(-n + 2) {
+    border-top: 0;
+  }
+
+  .capabilities li:first-child {
+    border-top: 1px solid var(--line);
+  }
+
   .about-section {
     gap: 18px;
   }
@@ -1241,9 +1283,24 @@ footer a {
   text-transform: none;
 }
 
+/* Tracking added for the Latin pages must come off here: spacing Hebrew
+   letterforms breaks their connections. Latin strings inside the Hebrew page
+   (EN switch, digits) keep their own rules. */
+[lang="he"] .site-nav a,
+[lang="he"] .location,
+[lang="he"] .text-action,
+[lang="he"] .project-link,
+[lang="he"] .primary-action,
+[lang="he"] .contact-action,
+[lang="he"] .capabilities h2,
+[lang="he"] .capabilities li {
+  letter-spacing: normal;
+}
+
 /* Measured values keep the instrument voice. Only words leave it. */
 [lang="he"] .proof-strip dd,
-[lang="he"] .project-index {
+[lang="he"] .project-index,
+[lang="he"] .capabilities li span {
   font-family: var(--font-mono);
 }
 
