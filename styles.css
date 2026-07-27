@@ -485,7 +485,7 @@ h1 span {
 .about-section {
   width: var(--content);
   margin: 0 auto;
-  padding: clamp(96px, 10vw, 150px) 0;
+  padding: clamp(80px, 8vw, 120px) 0;
 }
 
 .section-intro {
@@ -823,7 +823,7 @@ h1 span {
 
 .contact-section {
   width: 100%;
-  padding: clamp(84px, 10vw, 140px) max(20px, calc((100vw - 1460px) / 2));
+  padding: clamp(76px, 8vw, 112px) max(20px, calc((100vw - 1460px) / 2));
   color: #16130f;
   background: var(--signal);
 }
