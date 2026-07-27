@@ -12,28 +12,37 @@ if (header) {
   window.addEventListener("scroll", updateHeader, { passive: true });
 }
 
-// The dial's tick bands answer the scroll instead of idling on a clock: the
-// outer band turns with the page, the inner one counters it in CSS. The node
-// pulse stays CSS-only and is parked whenever the dial is off screen.
+// The dial's tick bands answer the scroll instead of idling on a clock. Their
+// transforms are written directly, so scrolling does not invalidate styles
+// for every descendant of the diagram.
 const systemMap = document.querySelector(".system-map");
 if (systemMap) {
+  const outerDial = systemMap.querySelector(".dial--outer");
+  const innerDial = systemMap.querySelector(".dial--inner");
+  let dialVisible = true;
+  let ticking = false;
+
+  const turnDial = () => {
+    const turn = window.scrollY * 0.08;
+    outerDial.style.transform = `rotate(${turn.toFixed(2)}deg)`;
+    innerDial.style.transform = `rotate(${(-turn * 0.6).toFixed(2)}deg)`;
+    ticking = false;
+  };
+
   new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      systemMap.toggleAttribute("data-paused", !entry.isIntersecting);
+      dialVisible = entry.isIntersecting;
+      systemMap.toggleAttribute("data-paused", !dialVisible);
+      if (dialVisible && !reducedMotion) turnDial();
     });
   }).observe(systemMap);
 
   if (!reducedMotion) {
-    let ticking = false;
-    const turn = () => {
-      systemMap.style.setProperty("--dial-turn", (window.scrollY * 0.08).toFixed(2) + "deg");
-      ticking = false;
-    };
-    turn();
+    turnDial();
     window.addEventListener("scroll", () => {
-      if (!ticking && !systemMap.hasAttribute("data-paused")) {
+      if (!ticking && dialVisible) {
         ticking = true;
-        requestAnimationFrame(turn);
+        requestAnimationFrame(turnDial);
       }
     }, { passive: true });
   }
