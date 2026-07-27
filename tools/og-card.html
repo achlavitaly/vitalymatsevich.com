@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Open Graph card source, 1200x630</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap">
+    <style>
+      /* Source for assets/og-card.jpg. Rendered by headless Chrome at exactly
+         1200x630, then encoded to JPEG. See README for the command. */
+      :root {
+        --ink: #11110f;
+        --paper: #eee9dc;
+        --muted: #aaa69b;
+        --line: #393732;
+        --signal: #d78a4a;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: var(--ink);
+      }
+
+      .card {
+        position: relative;
+        display: grid;
+        grid-template-columns: 745px 455px;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        color: var(--paper);
+        font-family: "Manrope", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background:
+          radial-gradient(circle at 88% 4%, rgba(215, 138, 74, 0.10), transparent 27rem),
+          var(--ink);
+      }
+
+      /* Same grain overlay as the site. It ties the card to the page and also
+         dithers the dark gradient, which is what stops JPEG banding. */
+      .card::after {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        content: "";
+        opacity: 0.025;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      .copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 64px 56px 64px 64px;
+      }
+
+      .eyebrow {
+        margin: 0 0 26px;
+        color: var(--signal);
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      .name {
+        margin: 0;
+        font-family: "Unbounded", sans-serif;
+        font-size: 66px;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+
+      .line {
+        max-width: 600px;
+        margin: 26px 0 0;
+        color: #c5c0b4;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.42;
+      }
+
+      .proof {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        margin: 44px 0 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .proof div {
+        padding: 20px 30px 20px 0;
+        border-right: 1px solid var(--line);
+      }
+
+      .proof div:last-child {
+        border-right: 0;
+      }
+
+      .proof div + div {
+        padding-left: 30px;
+      }
+
+      .proof dt {
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .proof dd {
+        margin: 6px 0 0;
+        font-family: "Unbounded", sans-serif;
+        font-size: 34px;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+      }
+
+      .proof dd span {
+        color: var(--signal);
+      }
+
+      .site {
+        margin: 40px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+        letter-spacing: 0.02em;
+      }
+
+      /* figure carries default UA margins, which otherwise inset the photo
+         from the card edge and push it 1em down out of the 630px cell. */
+      .portrait {
+        position: relative;
+        margin: 0;
+        border-left: 1px solid var(--line);
+      }
+
+      .portrait img {
+        display: block;
+        width: 100%;
+        height: 630px;
+        object-fit: cover;
+        object-position: 50% 42%;
+        filter: saturate(0.74) contrast(1.04);
+      }
+
+      /* Feathers the photograph into the dark field so the split does not read
+         as two pasted rectangles. */
+      .portrait::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background: linear-gradient(90deg, rgba(17, 17, 15, 0.92) 0%, rgba(17, 17, 15, 0.15) 34%, rgba(17, 17, 15, 0) 68%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="copy">
+        <p class="eyebrow">Ecommerce operations · Tel Aviv</p>
+        <h1 class="name">Vitaly Matsevich</h1>
+        <p class="line">I turn creative ideas into ecommerce systems that sell.</p>
+        <dl class="proof">
+          <div><dt>Etsy sales</dt><dd>5,000<span>+</span></dd></div>
+          <div><dt>Customer rating</dt><dd>5.0</dd></div>
+          <div><dt>Reviews</dt><dd>≈1,500</dd></div>
+        </dl>
+        <p class="site">vitalymatsevich.com</p>
+      </div>
+      <figure class="portrait">
+        <img src="../assets/vitaly-matsevich.jpg" alt="">
+      </figure>
+    </div>
+  </body>
+</html>
