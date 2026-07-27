@@ -140,10 +140,6 @@ a:focus-visible {
   transition: color 160ms ease;
 }
 
-.site-nav a:hover {
-  color: var(--paper);
-}
-
 .location {
   justify-self: end;
 }
@@ -161,15 +157,12 @@ main {
 
 .hero {
   display: grid;
-  /* The dial's labels sit outside its rings, so its column has to be wider
-     than the dial itself. At the old 0.58fr the easternmost label ran past
-     the content edge and was silently cut by main's overflow clip. */
-  grid-template-columns: minmax(0, 1.3fr) minmax(380px, 0.7fr);
+  grid-template-columns: minmax(0, 1fr) minmax(540px, 0.64fr);
   grid-template-rows: 1fr;
   width: var(--content);
-  min-height: max(760px, 100svh);
+  min-height: 720px;
   margin: 0 auto;
-  padding-top: 130px;
+  padding-top: 104px;
 }
 
 /* Logical properties throughout, so the Hebrew page mirrors without a second
@@ -178,7 +171,7 @@ main {
 .hero-copy {
   align-self: center;
   max-width: 900px;
-  padding-block: 72px 80px;
+  padding-block: 34px 44px;
   padding-inline: 0 clamp(28px, 6vw, 96px);
 }
 
@@ -187,7 +180,7 @@ main {
 .method-heading > p,
 .about-title > p,
 .contact-section > p:first-child {
-  margin: 0 0 28px;
+  margin: 0 0 22px;
   color: var(--signal);
   font-family: var(--font-mono);
   font-size: var(--t-micro);
@@ -219,7 +212,7 @@ h1 span {
 
 .hero-lede {
   max-width: 680px;
-  margin: 38px 0 30px;
+  margin: 28px 0 22px;
   color: var(--paper-dim);
   font-size: clamp(1rem, 1.3vw, 1.2rem);
   line-height: 1.65;
@@ -252,12 +245,6 @@ h1 span {
   transition: transform 180ms var(--ease-out);
 }
 
-.text-action:hover svg,
-.project-link:hover svg,
-.primary-action:hover svg {
-  transform: translateX(4px);
-}
-
 .text-action:active,
 .project-link:active,
 .primary-action:active,
@@ -267,11 +254,9 @@ h1 span {
 
 .system-map {
   position: relative;
-  align-self: center;
-  /* Reserve room in the column for the labels that ride outside the rings,
-     otherwise the easternmost one is clipped at narrower desktop widths. */
-  width: min(100% - 190px, 320px);
-  margin-inline: auto;
+  align-self: start;
+  width: min(310px, calc(100% - 200px));
+  margin: 96px auto 0;
   aspect-ratio: 1;
   border: 1px solid var(--line);
   border-radius: 50%;
@@ -327,25 +312,15 @@ h1 span {
 
 .system-map li {
   position: absolute;
-  /* The pivot is the li's left-centre, 4.5px below its top edge. Anchoring
-     the top at 50% put that pivot below the map centre and shifted the whole
-     node orbit down by half a dot, which read as crooked rings. */
-  top: calc(50% - 4.5px);
-  left: 50%;
-  width: 50%;
-  /* 76% of the li's half-width ray lands the dot exactly on the middle ring
-     (inset 12% -> radius 0.38W), so the seven nodes read as marks on a line
-     instead of floating between rings. */
-  transform: rotate(calc(var(--i) * 51.43deg)) translateX(76%);
-  transform-origin: left center;
+  inset: 0;
+  transform: rotate(calc(var(--i) * 51.428571deg));
+  transform-origin: center;
 }
 
 .system-map li::before {
-  margin-inline-start: -4px;
-}
-
-.system-map li::before {
-  display: block;
+  position: absolute;
+  top: 50%;
+  right: 12%;
   width: 9px;
   height: 9px;
   border: 2px solid var(--ink);
@@ -353,15 +328,13 @@ h1 span {
   background: var(--signal);
   box-shadow: 0 0 0 1px var(--signal);
   content: "";
+  transform: translate(50%, -50%);
 }
 
 .system-map li span {
   position: absolute;
-  top: 4.5px;
-  /* A zero-size anchor on the ray, just outside the outer ring. The label is
-     laid out around this point and counter-rotated about it, so its distance
-     from the ring no longer depends on how long the word happens to be. */
-  left: calc(24% + var(--label-gap, 18px));
+  top: 50%;
+  left: calc(100% + var(--label-gap, 18px));
   display: flex;
   width: 0;
   height: 0;
@@ -371,8 +344,9 @@ h1 span {
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: var(--t-micro);
+  line-height: 1;
   letter-spacing: 0.06em;
-  transform: rotate(calc(var(--i) * -51.43deg));
+  transform: rotate(calc(var(--i) * -51.428571deg));
 }
 
 /* Which way the word grows from its anchor: rightward on the eastern side,
@@ -406,10 +380,6 @@ h1 span {
   border-radius: 50%;
   pointer-events: none;
   will-change: transform;
-  /* Driven by scroll, not by a clock: app.js feeds --dial-turn from scrollY,
-     so the instrument responds to the reader instead of idling. With scripts
-     or motion off the bands simply hold still. */
-  transform: rotate(var(--dial-turn, 0deg));
 }
 
 /* A tick band is a fine conic comb masked down to a narrow ring, which keeps
@@ -426,7 +396,6 @@ h1 span {
   background: repeating-conic-gradient(from 0deg, var(--signal-dark) 0deg 0.7deg, transparent 0.7deg 15deg);
   -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
   mask: radial-gradient(closest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
-  transform: rotate(calc(var(--dial-turn, 0deg) * -0.6));
 }
 
 /* The signal: one spark travelling the middle ring. Continuous movement
@@ -460,7 +429,6 @@ h1 span {
 
 /* Offscreen the loop is pointless work, so app.js parks it. Defaulting to
    running means a failed script costs animation, never a broken diagram. */
-.system-map[data-paused] .dial,
 .system-map[data-paused] .signal {
   animation-play-state: paused;
 }
@@ -468,7 +436,7 @@ h1 span {
 .proof-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin: 50px 0 0;
+  margin: 34px 0 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -517,14 +485,14 @@ h1 span {
 .about-section {
   width: var(--content);
   margin: 0 auto;
-  padding: clamp(130px, 15vw, 230px) 0;
+  padding: clamp(96px, 10vw, 150px) 0;
 }
 
 .section-intro {
   display: grid;
   grid-template-columns: 0.48fr 1.05fr 0.47fr;
   align-items: end;
-  margin-bottom: 82px;
+  margin-bottom: 62px;
 }
 
 .section-intro > p:first-child {
@@ -855,7 +823,7 @@ h1 span {
 
 .contact-section {
   width: 100%;
-  padding: clamp(100px, 13vw, 190px) max(20px, calc((100vw - 1460px) / 2));
+  padding: clamp(84px, 10vw, 140px) max(20px, calc((100vw - 1460px) / 2));
   color: #16130f;
   background: var(--signal);
 }
@@ -962,14 +930,10 @@ footer a {
   }
 }
 
-@media (max-width: 1040px) {
-  :root {
-    --content: min(100% - 32px, 920px);
-  }
-
+@media (max-width: 1180px) {
   .hero {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto;
     min-height: auto;
   }
 
@@ -979,7 +943,13 @@ footer a {
 
   .system-map {
     width: min(52vw, 300px);
-    margin: 4px auto 64px;
+    margin: 20px auto 56px;
+  }
+}
+
+@media (max-width: 1040px) {
+  :root {
+    --content: min(100% - 32px, 920px);
   }
 
   .proof-strip {
@@ -1066,11 +1036,11 @@ footer a {
   }
 
   .hero {
-    padding-top: 82px;
+    padding-top: 70px;
   }
 
   .hero-copy {
-    padding: 70px 0 62px;
+    padding: 52px 0 44px;
   }
 
   h1 {
@@ -1091,7 +1061,7 @@ footer a {
      margin is what keeps every stage readable. */
   .system-map {
     width: min(48vw, 190px);
-    margin: 34px auto 92px;
+    margin: 20px auto 64px;
   }
 
   .system-map {
@@ -1136,7 +1106,7 @@ footer a {
   .method-section,
   .capabilities,
   .about-section {
-    padding: 110px 0;
+    padding: 82px 0;
   }
 
   .section-intro {
@@ -1356,12 +1326,6 @@ footer a {
   transform: scaleX(-1);
 }
 
-[dir="rtl"] .text-action:hover svg,
-[dir="rtl"] .project-link:hover svg,
-[dir="rtl"] .primary-action:hover svg {
-  transform: scaleX(-1) translateX(4px);
-}
-
 /* The lifecycle dial is a diagram, not prose: a cycle reads clockwise in both
    languages, and its node maths is built on rotate() which does not mirror.
    The markup pins it to ltr so the geometry is untouched; the Hebrew label
@@ -1383,10 +1347,6 @@ footer a {
   transition: color 160ms ease;
 }
 
-.lang-switch a:hover {
-  color: var(--paper);
-}
-
 .lang-switch [aria-current="true"] {
   color: var(--paper);
 }
@@ -1397,4 +1357,23 @@ footer a {
 
 [lang="he"] .lang-switch {
   font-family: var(--font-mono);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-nav a:hover,
+  .lang-switch a:hover {
+    color: var(--paper);
+  }
+
+  .text-action:hover svg,
+  .project-link:hover svg,
+  .primary-action:hover svg {
+    transform: translateX(4px);
+  }
+
+  [dir="rtl"] .text-action:hover svg,
+  [dir="rtl"] .project-link:hover svg,
+  [dir="rtl"] .primary-action:hover svg {
+    transform: scaleX(-1) translateX(4px);
+  }
 }
