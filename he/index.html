@@ -116,24 +116,35 @@
           </dl>
         </div>
 
-        <!-- The dial stays ltr: a cycle reads clockwise in both languages, and
-             its node placement is built on rotate(), which does not mirror. -->
-        <div class="system-map" dir="ltr" role="img" aria-label="מחזור החיים של האיקומרס: מחקר, מוצר, קטלוג, מכירה, שילוח, חוויית לקוח וניתוח">
-          <span class="dial dial--outer" aria-hidden="true"></span>
-          <span class="dial dial--inner" aria-hidden="true"></span>
-          <span class="signal" aria-hidden="true"></span>
-          <div class="map-core">
-            <span>מערכת אחת</span>
-            <strong>מחוברת</strong>
+        <div class="system-figure">
+          <!-- The dial stays ltr: a cycle reads clockwise in both languages,
+               and its node placement is built on rotate(). -->
+          <div class="system-map" dir="ltr" role="img" aria-label="מחזור החיים של האיקומרס: מחקר, מוצר, קטלוג, מכירה, שילוח, חוויית לקוח וניתוח">
+            <span class="dial dial--outer" aria-hidden="true"></span>
+            <span class="dial dial--inner" aria-hidden="true"></span>
+            <span class="signal" aria-hidden="true"></span>
+            <div class="map-core" dir="rtl">
+              <span>מקצה לקצה</span>
+              <strong>איקומרס</strong>
+            </div>
+            <ol aria-hidden="true">
+              <li style="--i: 0"></li>
+              <li style="--i: 1"></li>
+              <li style="--i: 2"></li>
+              <li style="--i: 3"></li>
+              <li style="--i: 4"></li>
+              <li style="--i: 5"></li>
+              <li style="--i: 6"></li>
+            </ol>
           </div>
-          <ol>
-            <li style="--i: 0"><span>מחקר</span></li>
-            <li style="--i: 1"><span>מוצר</span></li>
-            <li style="--i: 2"><span>קטלוג</span></li>
-            <li style="--i: 3"><span>מכירה</span></li>
-            <li style="--i: 4"><span>שילוח</span></li>
-            <li style="--i: 5"><span>חוויה</span></li>
-            <li style="--i: 6"><span>ניתוח</span></li>
+          <ol class="system-key" aria-hidden="true">
+            <li><span>01</span>מחקר</li>
+            <li><span>02</span>מוצר</li>
+            <li><span>03</span>קטלוג</li>
+            <li><span>04</span>מכירה</li>
+            <li><span>05</span>שילוח</li>
+            <li><span>06</span>חוויית לקוח</li>
+            <li><span>07</span>ניתוח</li>
           </ol>
         </div>
 
