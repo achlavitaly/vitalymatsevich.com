@@ -70,7 +70,7 @@ a:focus-visible {
 .skip-link {
   position: fixed;
   top: 12px;
-  left: 12px;
+  inset-inline-start: 12px;
   z-index: 100;
   padding: 12px 18px;
   color: var(--ink);
@@ -147,6 +147,13 @@ a:focus-visible {
   justify-self: end;
 }
 
+.header-end {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-self: end;
+}
+
 main {
   overflow: clip;
 }
@@ -164,10 +171,14 @@ main {
   padding-top: 130px;
 }
 
+/* Logical properties throughout, so the Hebrew page mirrors without a second
+   stylesheet. In a left-to-right document these resolve exactly as the
+   physical ones they replaced. */
 .hero-copy {
   align-self: center;
   max-width: 900px;
-  padding: 72px clamp(28px, 6vw, 96px) 80px 0;
+  padding-block: 72px 80px;
+  padding-inline: 0 clamp(28px, 6vw, 96px);
 }
 
 .role-line,
@@ -436,16 +447,16 @@ h1 span {
   justify-content: center;
   min-height: 94px;
   padding: 18px clamp(16px, 2vw, 32px);
-  border-right: 1px solid var(--line);
+  border-inline-end: 1px solid var(--line);
 }
 
 .proof-strip div:first-child {
-  padding-left: 0;
+  padding-inline-start: 0;
 }
 
 .proof-strip div:last-child {
-  border-right: 0;
-  padding-right: 0;
+  border-inline-end: 0;
+  padding-inline-end: 0;
 }
 
 .proof-strip dt {
@@ -915,7 +926,7 @@ footer a {
   }
 
   .hero-copy {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   .system-map {
@@ -990,7 +1001,9 @@ footer a {
   }
 
   .site-header {
-    grid-template-columns: 1fr auto;
+    /* Three cells stay on phones: the language switch has to survive even
+       though the location label does not. */
+    grid-template-columns: auto 1fr auto;
     min-height: 64px;
   }
 
@@ -1052,12 +1065,12 @@ footer a {
   }
 
   .proof-strip div:first-child {
-    padding-left: 0;
+    padding-inline-start: 0;
   }
 
   .proof-strip div:last-child {
-    padding-right: 0;
-    border-right: 0;
+    padding-inline-end: 0;
+    border-inline-end: 0;
   }
 
   .proof-strip dd {
@@ -1189,4 +1202,119 @@ footer a {
     opacity: 1;
     transform: none;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Hebrew, right to left.
+
+   Frank Ruhl Libre and IBM Plex Sans Hebrew carry the display and body voices
+   into Hebrew natively, so the identity survives the language switch instead
+   of being re-approximated. The monospace does not carry over, because
+   JetBrains Mono has no Hebrew. That costs nothing where it matters: the
+   things set in mono here are measurements, and the digits stay Latin, so
+   only the label words move to the Hebrew sans.
+
+   Hebrew has no uppercase, and letter-spacing Hebrew is poor practice because
+   it breaks the connection between letterforms. The notation voice therefore
+   drops both devices in Hebrew and leans on weight and colour instead.
+--------------------------------------------------------------------------- */
+[lang="he"] {
+  --font-body: "IBM Plex Sans Hebrew", system-ui, sans-serif;
+}
+
+[lang="he"] .role-line,
+[lang="he"] .section-intro > p:first-child,
+[lang="he"] .method-heading > p,
+[lang="he"] .about-title > p,
+[lang="he"] .contact-section > p:first-child,
+[lang="he"] .field-label,
+[lang="he"] .project-heading p,
+[lang="he"] .project-evidence figcaption,
+[lang="he"] .proof-strip dt,
+[lang="he"] .method-track span,
+[lang="he"] .system-map li span,
+[lang="he"] .map-core span,
+[lang="he"] .map-core strong {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+/* Measured values keep the instrument voice. Only words leave it. */
+[lang="he"] .proof-strip dd,
+[lang="he"] .project-index {
+  font-family: var(--font-mono);
+}
+
+/* A figure is one left-to-right run even inside Hebrew. Without this the
+   neutral characters get reordered by the bidi algorithm and "5,000+" renders
+   as "+5,000", "≈1,500" as "1,500≈". Aligning to the right keeps the number
+   on the reading edge of the column. */
+[lang="he"] .proof-strip dd {
+  direction: ltr;
+  text-align: right;
+}
+
+/* Hebrew sits lower and needs a little more leading than the Latin setting. */
+[lang="he"] h1 {
+  line-height: 1.18;
+}
+
+[lang="he"] .section-intro h2,
+[lang="he"] .method-heading h2,
+[lang="he"] .about-title h2,
+[lang="he"] .contact-section h2,
+[lang="he"] .project-heading h3 {
+  line-height: 1.2;
+}
+
+/* Directional icons should point the way the language reads. */
+[dir="rtl"] .text-action svg,
+[dir="rtl"] .project-link svg,
+[dir="rtl"] .primary-action svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .text-action:hover svg,
+[dir="rtl"] .project-link:hover svg,
+[dir="rtl"] .primary-action:hover svg {
+  transform: scaleX(-1) translateX(4px);
+}
+
+/* The lifecycle dial is a diagram, not prose: a cycle reads clockwise in both
+   languages, and its node maths is built on rotate() which does not mirror.
+   The markup pins it to ltr so the geometry is untouched; the Hebrew label
+   text inside still renders right to left on its own. */
+.lang-switch {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-self: end;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
+}
+
+.lang-switch a {
+  padding: 4px 2px;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.lang-switch a:hover {
+  color: var(--paper);
+}
+
+.lang-switch [aria-current="true"] {
+  color: var(--paper);
+}
+
+.lang-switch span {
+  color: var(--line);
+}
+
+[lang="he"] .lang-switch {
+  font-family: var(--font-mono);
 }

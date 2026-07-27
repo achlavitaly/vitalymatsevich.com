@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Open Graph card source, Hebrew, 1200x630</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;600&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+    <style>
+      /* Source for assets/og-card-he.jpg. Mirrored against the English card:
+         in a right-to-left reading order the text column leads, so the
+         photograph moves to the left edge. Rendered at exactly 1200x630. */
+      :root {
+        --ink: #11110f;
+        --paper: #eee9dc;
+        --muted: #aaa69b;
+        --line: #393732;
+        --signal: #d78a4a;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: var(--ink);
+      }
+
+      .card {
+        position: relative;
+        display: grid;
+        grid-template-columns: 455px 745px;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        color: var(--paper);
+        font-family: "IBM Plex Sans Hebrew", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background:
+          radial-gradient(circle at 12% 4%, rgba(215, 138, 74, 0.10), transparent 27rem),
+          var(--ink);
+      }
+
+      .card::after {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        content: "";
+        opacity: 0.025;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      .copy {
+        grid-column: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 64px 64px 64px 56px;
+      }
+
+      /* Hebrew has no uppercase and should not be tracked, so the notation
+         voice here carries weight and colour instead of those devices. */
+      .eyebrow {
+        margin: 0 0 26px;
+        color: var(--signal);
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .name {
+        margin: 0;
+        font-family: "Frank Ruhl Libre", serif;
+        font-size: 74px;
+        font-weight: 500;
+        line-height: 1.16;
+      }
+
+      .line {
+        max-width: 600px;
+        margin: 22px 0 0;
+        color: #c5c0b4;
+        font-size: 24px;
+        line-height: 1.5;
+      }
+
+      .proof {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        margin: 40px 0 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .proof div {
+        padding: 20px 0 20px 30px;
+        border-inline-end: 1px solid var(--line);
+      }
+
+      .proof div:last-child {
+        border-inline-end: 0;
+      }
+
+      .proof div + div {
+        padding-inline-start: 30px;
+      }
+
+      .proof dt {
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      /* Digits stay in the instrument voice: they are Latin in Hebrew too. */
+      .proof dd {
+        margin: 8px 0 0;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 31px;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        direction: ltr;
+        text-align: right;
+      }
+
+      .proof dd span {
+        color: var(--signal);
+      }
+
+      .site {
+        margin: 38px 0 0;
+        color: var(--muted);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 15px;
+        letter-spacing: 0.04em;
+        direction: ltr;
+        text-align: right;
+      }
+
+      .portrait {
+        position: relative;
+        grid-column: 1;
+        margin: 0;
+        border-inline-start: 1px solid var(--line);
+      }
+
+      .portrait img {
+        display: block;
+        width: 100%;
+        height: 630px;
+        object-fit: cover;
+        object-position: 50% 42%;
+        filter: saturate(0.74) contrast(1.04);
+      }
+
+      .portrait::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background: linear-gradient(270deg, rgba(17, 17, 15, 0.92) 0%, rgba(17, 17, 15, 0.15) 34%, rgba(17, 17, 15, 0) 68%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <figure class="portrait">
+        <img src="../assets/vitaly-matsevich.jpg" alt="">
+      </figure>
+      <div class="copy">
+        <p class="eyebrow">תפעול איקומרס · תל אביב</p>
+        <h1 class="name">ויטלי מצביץ'</h1>
+        <p class="line">אני הופך רעיונות יצירתיים למערכות איקומרס שמוכרות.</p>
+        <dl class="proof">
+          <div><dt>מכירות באטסי</dt><dd>5,000<span>+</span></dd></div>
+          <div><dt>דירוג לקוחות</dt><dd>5.0</dd></div>
+          <div><dt>ביקורות</dt><dd>≈1,500</dd></div>
+        </dl>
+        <p class="site">vitalymatsevich.com</p>
+      </div>
+    </div>
+  </body>
+</html>
