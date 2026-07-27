@@ -270,7 +270,7 @@ h1 span {
   align-self: center;
   /* Reserve room in the column for the labels that ride outside the rings,
      otherwise the easternmost one is clipped at narrower desktop widths. */
-  width: min(100% - 210px, 280px);
+  width: min(100% - 190px, 320px);
   margin-inline: auto;
   aspect-ratio: 1;
   border: 1px solid var(--line);
@@ -327,7 +327,10 @@ h1 span {
 
 .system-map li {
   position: absolute;
-  top: 50%;
+  /* The pivot is the li's left-centre, 4.5px below its top edge. Anchoring
+     the top at 50% put that pivot below the map centre and shifted the whole
+     node orbit down by half a dot, which read as crooked rings. */
+  top: calc(50% - 4.5px);
   left: 50%;
   width: 50%;
   /* 76% of the li's half-width ray lands the dot exactly on the middle ring
@@ -354,18 +357,34 @@ h1 span {
 
 .system-map li span {
   position: absolute;
-  top: -8px;
-  /* Anchor just outside the outer ring along the ray. The counter-rotation
-     spins the label back level around its own centre, which by itself leaves
-     east labels overlapping the circle and west labels detached; the cos/sin
-     nudge resolves each label away from the ring on its own side. */
-  left: calc(24% + 12px);
+  top: 4.5px;
+  /* A zero-size anchor on the ray, just outside the outer ring. The label is
+     laid out around this point and counter-rotated about it, so its distance
+     from the ring no longer depends on how long the word happens to be. */
+  left: calc(24% + var(--label-gap, 18px));
+  display: flex;
+  width: 0;
+  height: 0;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: nowrap;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: var(--t-micro);
   letter-spacing: 0.06em;
-  transform: rotate(calc(var(--i) * -51.43deg))
-    translate(calc(cos(var(--i) * 51.43deg) * 10px), calc(sin(var(--i) * 51.43deg) * 10px));
+  transform: rotate(calc(var(--i) * -51.43deg));
+}
+
+/* Which way the word grows from its anchor: rightward on the eastern side,
+   leftward on the western side, centred at the top and bottom. */
+.system-map li:nth-child(3) span,
+.system-map li:nth-child(6) span {
+  justify-content: center;
+}
+
+.system-map li:nth-child(4) span,
+.system-map li:nth-child(5) span {
+  justify-content: flex-end;
 }
 
 /* ---------------------------------------------------------------------------
@@ -382,11 +401,6 @@ h1 span {
    is offset by its own --i, which is why the pulse travels instead of
    flashing everywhere at once.
 --------------------------------------------------------------------------- */
-.system-map {
-  --stage: 0.62s;
-  --lap: calc(var(--stage) * 7);
-}
-
 .dial {
   position: absolute;
   border-radius: 50%;
@@ -415,33 +429,39 @@ h1 span {
   transform: rotate(calc(var(--dial-turn, 0deg) * -0.6));
 }
 
-.system-map li::before {
-  animation: node-signal var(--lap) var(--ease-out) infinite;
-  animation-delay: calc(var(--i) * var(--stage));
+/* The signal: one spark travelling the middle ring. Continuous movement
+   instead of a blink, because an instrument sweeps, it does not flash. The
+   element shares the ring's box, so its rotating edge IS the ring line. */
+.system-map .signal {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  animation: signal-orbit 26s linear infinite;
 }
 
-.system-map li span {
-  animation: node-label var(--lap) var(--ease-out) infinite;
-  animation-delay: calc(var(--i) * var(--stage));
+.system-map .signal::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -3.5px;
+  width: 7px;
+  height: 7px;
+  margin-top: -3.5px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 0 9px 2px rgba(215, 138, 74, 0.55);
 }
 
-@keyframes node-signal {
-  0% { transform: scale(1); box-shadow: 0 0 0 1px var(--signal); }
-  6% { transform: scale(1.8); box-shadow: 0 0 0 1px var(--signal), 0 0 15px 3px rgba(215, 138, 74, 0.5); }
-  26%, 100% { transform: scale(1); box-shadow: 0 0 0 1px var(--signal); }
-}
-
-@keyframes node-label {
-  0% { color: var(--muted); }
-  6% { color: var(--paper); }
-  26%, 100% { color: var(--muted); }
+@keyframes signal-orbit {
+  to { transform: rotate(360deg); }
 }
 
 /* Offscreen the loop is pointless work, so app.js parks it. Defaulting to
    running means a failed script costs animation, never a broken diagram. */
 .system-map[data-paused] .dial,
-.system-map[data-paused] li::before,
-.system-map[data-paused] li span {
+.system-map[data-paused] .signal {
   animation-play-state: paused;
 }
 
@@ -958,8 +978,8 @@ footer a {
   }
 
   .system-map {
-    width: min(56vw, 320px);
-    margin: 20px auto 90px;
+    width: min(52vw, 300px);
+    margin: 4px auto 64px;
   }
 
   .proof-strip {
@@ -1074,8 +1094,11 @@ footer a {
     margin: 34px auto 92px;
   }
 
+  .system-map {
+    --label-gap: 12px;
+  }
+
   .system-map li span {
-    right: 0;
     font-size: 0.6rem;
   }
 
