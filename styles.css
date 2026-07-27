@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap");
-
 :root {
   color-scheme: dark;
   --ink: #11110f;
@@ -717,6 +715,28 @@ h1 span {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+/* This section sits on --signal, so the accent action stays the filled ink
+   button and the supporting actions become outlined. Padding is 13/19 because
+   the 1px border adds the missing pixel back and keeps the box at 14/20. */
+.primary-action--quiet {
+  padding: 13px 19px;
+  color: #16130f;
+  background: transparent;
+  border: 1px solid rgba(22, 19, 15, 0.42);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .primary-action--quiet:hover {
+    border-color: #16130f;
+    background: rgba(22, 19, 15, 0.07);
+  }
+}
+
+/* The global focus ring is --signal, which is invisible on this section. */
+.contact-section a:focus-visible {
+  outline-color: var(--ink);
 }
 
 footer {
