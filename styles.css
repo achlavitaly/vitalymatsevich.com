@@ -252,11 +252,19 @@ h1 span {
   transform: scale(0.97);
 }
 
+.system-figure {
+  align-self: start;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 160px);
+  gap: 24px;
+  align-items: center;
+  width: min(100%, 464px);
+  margin: 92px auto 0;
+}
+
 .system-map {
   position: relative;
-  align-self: start;
-  width: min(310px, calc(100% - 200px));
-  margin: 96px auto 0;
+  width: 280px;
   aspect-ratio: 1;
   border: 1px solid var(--line);
   border-radius: 50%;
@@ -278,28 +286,32 @@ h1 span {
 
 .map-core {
   position: absolute;
-  inset: 38%;
+  inset: 34%;
   z-index: 1;
   display: flex;
   flex-direction: column;
+  gap: 4px;
   justify-content: center;
   text-align: center;
 }
 
+.map-core span,
+.map-core strong {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+}
+
 .map-core span {
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: var(--t-micro);
-  letter-spacing: 0.08em;
   text-transform: lowercase;
 }
 
 .map-core strong {
   color: var(--signal);
-  font-family: var(--font-mono);
-  font-size: clamp(0.85rem, 1.25vw, 1.15rem);
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  text-transform: lowercase;
 }
 
 .system-map ol {
@@ -331,34 +343,30 @@ h1 span {
   transform: translate(50%, -50%);
 }
 
-.system-map li span {
-  position: absolute;
-  top: 50%;
-  left: calc(100% + var(--label-gap, 18px));
-  display: flex;
-  width: 0;
-  height: 0;
+.system-key {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.system-key li {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 10px;
   align-items: center;
-  justify-content: flex-start;
-  white-space: nowrap;
+  min-height: 38px;
+  border-bottom: 1px solid var(--line);
   color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
+.system-key span {
+  color: var(--signal);
   font-family: var(--font-mono);
-  font-size: var(--t-micro);
-  line-height: 1;
+  font-size: 0.58rem;
   letter-spacing: 0.06em;
-  transform: rotate(calc(var(--i) * -51.428571deg));
-}
-
-/* Which way the word grows from its anchor: rightward on the eastern side,
-   leftward on the western side, centred at the top and bottom. */
-.system-map li:nth-child(3) span,
-.system-map li:nth-child(6) span {
-  justify-content: center;
-}
-
-.system-map li:nth-child(4) span,
-.system-map li:nth-child(5) span {
-  justify-content: flex-end;
 }
 
 /* ---------------------------------------------------------------------------
@@ -485,7 +493,11 @@ h1 span {
 .about-section {
   width: var(--content);
   margin: 0 auto;
-  padding: clamp(80px, 8vw, 120px) 0;
+  padding: clamp(72px, 7vw, 104px) 0 0;
+}
+
+.about-section {
+  padding-bottom: clamp(72px, 7vw, 104px);
 }
 
 .section-intro {
@@ -674,7 +686,6 @@ h1 span {
   display: grid;
   grid-template-columns: 0.42fr 0.58fr;
   gap: 70px;
-  border-top: 1px solid var(--line);
 }
 
 .method-heading {
@@ -941,9 +952,8 @@ footer a {
     padding-inline-end: 0;
   }
 
-  .system-map {
-    width: min(52vw, 300px);
-    margin: 20px auto 56px;
+  .system-figure {
+    margin: 28px auto 52px;
   }
 }
 
@@ -1036,11 +1046,11 @@ footer a {
   }
 
   .hero {
-    padding-top: 70px;
+    padding-top: 64px;
   }
 
   .hero-copy {
-    padding: 52px 0 44px;
+    padding: 36px 0 24px;
   }
 
   h1 {
@@ -1055,26 +1065,8 @@ footer a {
     font-size: 0.97rem;
   }
 
-  /* Labels ride outside the rings, so the circle cannot simply fill the phone:
-     the widest label ("Fulfillment") needs its own margin beyond the ring or it
-     gets clipped, which is what used to happen. Sizing the dial to leave that
-     margin is what keeps every stage readable. */
-  .system-map {
-    width: min(48vw, 190px);
-    margin: 20px auto 64px;
-  }
-
-  .system-map {
-    --label-gap: 12px;
-  }
-
-  .system-map li span {
-    font-size: 0.6rem;
-  }
-
-  .system-map li::before {
-    width: 7px;
-    height: 7px;
+  .system-figure {
+    display: none;
   }
 
   /* Keep the outer cells flush with the column and drop the trailing rule.
@@ -1106,12 +1098,16 @@ footer a {
   .method-section,
   .capabilities,
   .about-section {
-    padding: 82px 0;
+    padding: 52px 0 0;
+  }
+
+  .about-section {
+    padding-bottom: 52px;
   }
 
   .section-intro {
     display: block;
-    margin-bottom: 52px;
+    margin-bottom: 38px;
   }
 
   .section-intro > p:last-child {
@@ -1121,7 +1117,7 @@ footer a {
   .project {
     display: grid;
     grid-template-columns: 34px 1fr;
-    padding: 42px 0 30px;
+    padding: 34px 0 26px;
   }
 
   .project-heading,
@@ -1143,22 +1139,24 @@ footer a {
 
   .project-summary,
   .project-system {
-    margin-top: 34px;
+    margin-top: 28px;
   }
 
   .project-foot {
     align-items: flex-start;
     flex-direction: column;
     gap: 24px;
-    margin-top: 38px;
+    margin-top: 30px;
   }
 
   .method-section {
-    gap: 56px;
+    gap: 36px;
   }
 
   .method-track article {
     grid-template-columns: 38px 1fr;
+    min-height: auto;
+    padding: 28px 0;
   }
 
   .method-track p {
@@ -1167,7 +1165,7 @@ footer a {
 
   .capabilities {
     grid-template-columns: 1fr;
-    gap: 42px;
+    gap: 28px;
   }
 
   /* One column on phones: the second grid column would otherwise keep its
@@ -1192,7 +1190,7 @@ footer a {
      single-column grid, which read as a mistake next to left-aligned copy. */
   .portrait {
     width: min(76vw, 330px);
-    margin: 38px auto 12px;
+    margin: 28px auto 12px;
   }
 
   .portrait img {
@@ -1200,7 +1198,7 @@ footer a {
   }
 
   .about-copy {
-    padding-top: 30px;
+    padding-top: 18px;
   }
 
   .contact-section {
