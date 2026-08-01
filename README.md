@@ -12,6 +12,8 @@ npx --package clean-css-cli cleancss -o styles.min.css styles.css
 
 The site self-hosts its Google Fonts subsets under `fonts/`, together with their SIL Open Font License files. This avoids an external render-blocking stylesheet while preserving the existing typography.
 
+Responsive artwork uses 480, 640, 768, and 960 pixel WebP derivatives where the source size allows it. Keep the high-resolution files without a width suffix as the source of truth, then regenerate the derivatives with ImageMagick after replacing an image. The `apple-touch-icon.png` file is a 180 by 180 PNG rendered from `favicon.svg`.
+
 ## Local preview
 
 ```
