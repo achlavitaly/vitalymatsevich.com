@@ -202,6 +202,8 @@ a:focus-visible {
   display: inline-flex;
   gap: 12px;
   align-items: center;
+  min-height: 44px;
+  min-width: 44px;
   width: max-content;
   font-size: 0.9rem;
   font-weight: 600;
@@ -234,6 +236,14 @@ a:focus-visible {
   transition: color 160ms ease;
 }
 
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+}
+
 .location {
   justify-self: end;
 }
@@ -249,21 +259,26 @@ main {
   overflow: clip;
 }
 
+section[id] {
+  scroll-margin-top: 76px;
+}
+
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(540px, 0.64fr);
+  grid-template-columns: minmax(0, 0.92fr) minmax(400px, 0.58fr);
   grid-template-rows: 1fr;
+  gap: clamp(32px, 5vw, 84px);
   width: var(--content);
-  min-height: 720px;
+  min-height: 0;
   margin: 0 auto;
-  padding-top: 104px;
+  padding-top: 88px;
 }
 
 /* Logical properties throughout, so the Hebrew page mirrors without a second
    stylesheet. In a left-to-right document these resolve exactly as the
    physical ones they replaced. */
 .hero-copy {
-  align-self: center;
+  align-self: start;
   min-width: 0;
   max-width: 900px;
   padding-block: 34px 44px;
@@ -272,6 +287,7 @@ main {
 
 .role-line,
 .section-intro > p:first-child,
+.creative-system-heading > p:first-child,
 .method-heading > p,
 .about-title > p,
 .contact-section > p:first-child {
@@ -347,193 +363,65 @@ h1 span {
   transform: scale(0.97);
 }
 
-.system-figure {
+.hero-visual {
   align-self: start;
-  display: grid;
-  grid-template-columns: 280px minmax(0, 160px);
-  gap: 24px;
-  align-items: center;
-  width: min(100%, 464px);
-  margin: 92px auto 0;
+  width: min(100%, 520px);
+  margin: 34px 0 28px auto;
 }
 
-.system-map {
-  position: relative;
-  width: 280px;
-  aspect-ratio: 1;
-  border: 1px solid var(--line);
-  border-radius: 50%;
+[dir="rtl"] .hero-visual {
+  margin-inline: auto 0;
 }
 
-.system-map::before,
-.system-map::after {
-  position: absolute;
-  inset: 12%;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  content: "";
-}
-
-.system-map::after {
-  inset: 29%;
-  border-color: var(--signal-dark);
-}
-
-.map-core {
-  position: absolute;
-  inset: 34%;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  justify-content: center;
-  text-align: center;
-}
-
-.map-core span,
-.map-core strong {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  line-height: 1.1;
-  letter-spacing: 0.06em;
-}
-
-.map-core span {
-  color: var(--muted);
-  text-transform: lowercase;
-}
-
-.map-core strong {
-  color: var(--signal);
-  font-weight: 600;
-  text-transform: lowercase;
-}
-
-.system-map ol {
-  position: absolute;
-  inset: 0;
+.hero-work {
   margin: 0;
-  padding: 0;
-  list-style: none;
+  background: var(--ink);
 }
 
-.system-map li {
-  position: absolute;
-  inset: 0;
-  transform: rotate(calc(var(--i) * 51.428571deg));
-  transform-origin: center;
+.hero-work > a,
+.creative-piece > a {
+  display: block;
+  color: inherit;
 }
 
-.system-map li::before {
-  position: absolute;
-  top: 50%;
-  right: 12%;
-  width: 9px;
-  height: 9px;
-  border: 2px solid var(--ink);
-  border-radius: 50%;
-  background: var(--signal);
-  box-shadow: 0 0 0 1px var(--signal);
-  content: "";
-  transform: translate(50%, -50%);
+.creative-piece picture {
+  display: block;
 }
 
-.system-key {
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--line);
-  list-style: none;
+.hero-work > a:focus-visible,
+.creative-piece > a:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: -2px;
 }
 
-.system-key li {
-  display: grid;
-  grid-template-columns: 26px 1fr;
-  gap: 10px;
-  align-items: center;
-  min-height: 38px;
-  border-bottom: 1px solid var(--line);
+.hero-work--primary {
+  width: 100%;
+}
+
+.hero-work img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  filter: saturate(0.82) contrast(1.04);
+}
+
+.hero-work figcaption,
+.creative-piece figcaption {
   color: var(--muted);
-  font-size: 0.7rem;
-  letter-spacing: 0.02em;
+  font-family: var(--font-body);
+  font-size: var(--t-micro);
+  line-height: 1.5;
 }
 
-.system-key span {
+.hero-work figcaption {
+  padding: 10px 0;
+}
+
+.hero-work figcaption span,
+.creative-piece figcaption span {
   color: var(--signal);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.06em;
-}
-
-/* ---------------------------------------------------------------------------
-   The lifecycle dial.
-
-   This diagram is the page's argument, not an ornament, so it gets the one
-   authored moment on the site. Two ruled tick bands drift in opposite
-   directions at instrument speed, and a copper signal walks the seven stages
-   in order, so the thing reads as a cycle that is running rather than a
-   labelled circle. Nothing here moves layout: only transform, colour and
-   shadow, on elements that already exist.
-
-   --stage is one step of the signal; the full lap is seven stages. Each node
-   is offset by its own --i, which is why the pulse travels instead of
-   flashing everywhere at once.
---------------------------------------------------------------------------- */
-.dial {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  will-change: transform;
-}
-
-/* A tick band is a fine conic comb masked down to a narrow ring, which keeps
-   it one compositable element instead of dozens of positioned marks. */
-.dial--outer {
-  inset: 0;
-  background: repeating-conic-gradient(from 0deg, var(--line) 0deg 0.32deg, transparent 0.32deg 5deg);
-  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 9px), #000 calc(100% - 9px));
-  mask: radial-gradient(closest-side, transparent calc(100% - 9px), #000 calc(100% - 9px));
-}
-
-.dial--inner {
-  inset: 29%;
-  background: repeating-conic-gradient(from 0deg, var(--signal-dark) 0deg 0.7deg, transparent 0.7deg 15deg);
-  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
-  mask: radial-gradient(closest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
-}
-
-/* The signal: one spark travelling the middle ring. Continuous movement
-   instead of a blink, because an instrument sweeps, it does not flash. The
-   element shares the ring's box, so its rotating edge IS the ring line. */
-.system-map .signal {
-  position: absolute;
-  inset: 12%;
-  border-radius: 50%;
-  pointer-events: none;
-  will-change: transform;
-  animation: signal-orbit 26s linear infinite;
-}
-
-.system-map .signal::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -3.5px;
-  width: 7px;
-  height: 7px;
-  margin-top: -3.5px;
-  border-radius: 50%;
-  background: var(--paper);
-  box-shadow: 0 0 9px 2px rgba(215, 138, 74, 0.55);
-}
-
-@keyframes signal-orbit {
-  to { transform: rotate(360deg); }
-}
-
-/* Offscreen the loop is pointless work, so app.js parks it. Defaulting to
-   running means a failed script costs animation, never a broken diagram. */
-.system-map[data-paused] .signal {
-  animation-play-state: paused;
 }
 
 .proof-strip {
@@ -583,13 +471,14 @@ h1 span {
   color: var(--signal);
 }
 
+.creative-section,
+.creative-system,
 .work-section,
 .method-section,
-.capabilities,
 .about-section {
   width: var(--content);
   margin: 0 auto;
-  padding: clamp(72px, 7vw, 104px) 0 0;
+  padding: clamp(64px, 6vw, 88px) 0 0;
 }
 
 .about-section {
@@ -598,32 +487,183 @@ h1 span {
 
 .section-intro {
   display: grid;
-  grid-template-columns: 0.48fr 1.05fr 0.47fr;
-  align-items: end;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(22px, 3vw, 44px);
+  align-items: start;
   margin-bottom: 62px;
 }
 
 .section-intro > p:first-child {
-  align-self: start;
+  grid-column: 1 / 3;
+  padding-top: 0.12rem;
 }
 
 .section-intro h2,
+.creative-system-heading h2,
 .method-heading h2,
 .about-title h2 {
   max-width: 800px;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 4.8vw, 5.4rem);
+  font-size: clamp(2.4rem, 4vw, 4.7rem);
   font-weight: 500;
   letter-spacing: -0.015em;
   line-height: 1.02;
 }
 
+.section-intro h2 span,
+.creative-system-heading h2 span {
+  display: block;
+}
+
+.section-intro h2 {
+  grid-column: 4 / 9;
+  max-width: 620px;
+  padding-top: 0.12rem;
+}
+
+[lang="en"] .section-intro h2 span,
+[lang="en"] .creative-system-heading h2 span,
+[lang="en"] .method-heading h2 span,
+[lang="en"] .about-title h2 span {
+  white-space: nowrap;
+}
+
 .section-intro > p:last-child {
-  max-width: 330px;
-  margin: 0 0 8px 40px;
+  grid-column: 9 / -1;
+  max-width: 520px;
+  margin: 0;
   color: var(--muted);
   font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.creative-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(38px, 4vw, 58px) clamp(24px, 3vw, 44px);
+  align-items: start;
+}
+
+.creative-piece {
+  margin: 0;
+  background: transparent;
+}
+
+.creative-piece > a {
+  display: grid;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: #171511;
+}
+
+.creative-piece img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: saturate(0.98) contrast(1.02);
+  transition: filter 220ms ease;
+}
+
+.creative-piece picture {
+  width: 100%;
+  height: 100%;
+}
+
+.creative-piece figcaption {
+  display: flex;
+  gap: 22px;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.creative-piece figcaption span {
+  flex: 0 0 auto;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.gallery-link {
+  margin-top: 22px;
+}
+
+.creative-system {
+  display: block;
+}
+
+.creative-system-heading {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(22px, 3vw, 44px);
+  align-items: start;
+}
+
+.creative-system-heading > p:first-child {
+  grid-column: 1 / 3;
+  padding-top: 0.12rem;
+}
+
+.creative-system-heading h2 {
+  grid-column: 4 / 9;
+  max-width: 620px;
+  padding-top: 0.12rem;
+}
+
+.creative-system-heading > p:last-child {
+  grid-column: 9 / -1;
+  max-width: 520px;
+  margin: 0;
+  color: var(--paper-dim);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.creative-system-track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 0;
+  row-gap: 0;
+  margin: 0;
+  margin-top: clamp(38px, 5vw, 64px);
+  padding: 0;
+  border-top: 1px solid var(--line);
+  border-inline-start: 1px solid var(--line);
+  list-style: none;
+}
+
+.creative-system-track li {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 12px 14px;
+  align-items: start;
+  min-height: 164px;
+  padding: 24px clamp(20px, 2vw, 32px);
+  border-inline-end: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.creative-system-track span {
+  color: var(--signal);
+  font-family: var(--font-mono);
+  font-size: var(--t-note);
+}
+
+.creative-system-track strong {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.creative-system-track p {
+  grid-column: 2;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
   line-height: 1.65;
 }
 
@@ -634,10 +674,11 @@ h1 span {
 .project {
   --project-color: var(--signal);
   position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: 0.12fr 0.36fr 0.28fr 0.24fr;
-  column-gap: 30px;
-  padding: 58px 0 32px;
+  grid-template-columns: 48px minmax(250px, 0.9fr) minmax(260px, 1fr) minmax(230px, 0.85fr);
+  column-gap: clamp(20px, 2.4vw, 36px);
+  padding: 42px 0 30px;
   border-bottom: 1px solid var(--line);
   transition: background-color 220ms ease;
 }
@@ -668,8 +709,7 @@ h1 span {
 }
 
 .project-heading p {
-  min-height: 36px;
-  margin: 0 0 30px;
+  margin: 0 0 18px;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: var(--t-micro);
@@ -695,14 +735,14 @@ h1 span {
 
 .project-summary {
   max-width: 390px;
-  margin: 66px 0 0;
+  margin: 0;
   color: var(--paper-dim);
   font-size: 0.9rem;
   line-height: 1.7;
 }
 
 .project-system {
-  margin-top: 66px;
+  margin-top: 0;
 }
 
 .outcomes {
@@ -728,8 +768,8 @@ h1 span {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 52px;
-  padding-top: 26px;
+  margin-top: 34px;
+  padding-top: 22px;
   border-top: 1px solid var(--line);
 }
 
@@ -757,7 +797,7 @@ h1 span {
 
 .project-evidence {
   grid-column: 2 / -1;
-  margin: 32px 0 0;
+  margin: 26px 0 0;
 }
 
 .project-evidence img {
@@ -779,32 +819,53 @@ h1 span {
 }
 
 .method-section {
-  display: grid;
-  grid-template-columns: 0.42fr 0.58fr;
-  gap: 70px;
+  display: block;
+}
+
+.work-section .section-intro {
+  align-items: start;
+}
+
+.work-section .section-intro > p:last-child {
+  margin-top: 0;
 }
 
 .method-heading {
-  position: sticky;
-  top: 120px;
-  align-self: start;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(22px, 3vw, 44px);
+  margin-bottom: clamp(38px, 5vw, 64px);
+}
+
+.method-heading > p {
+  grid-column: 1 / 3;
 }
 
 .method-heading h2 {
-  max-width: 600px;
-  font-size: clamp(2.2rem, 3.7vw, 4.3rem);
+  grid-column: 4 / 11;
+  max-width: 720px;
+}
+
+.method-heading h2 span,
+.about-title h2 span {
+  display: block;
 }
 
 .method-track {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 0;
   border-top: 1px solid var(--line);
+  border-inline-start: 1px solid var(--line);
 }
 
 .method-track article {
   display: grid;
   grid-template-columns: 62px 0.75fr 1fr;
   gap: 22px;
-  min-height: 190px;
-  padding: 36px 0;
+  min-height: 158px;
+  padding: 30px clamp(20px, 2vw, 32px);
+  border-inline-end: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
@@ -831,79 +892,36 @@ h1 span {
   line-height: 1.7;
 }
 
-.capabilities {
-  display: grid;
-  grid-template-columns: 0.35fr 0.65fr;
-  gap: 90px;
-}
-
-.capabilities h2 {
-  max-width: 260px;
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  line-height: 1.5;
-}
-
-.capabilities ul {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: clamp(48px, 6vw, 110px);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* A numbered index, not a tag cloud. Every entry sits on its own rule with a
-   mono ordinal, so the list reads as a contents page rather than a pile of
-   boxes wrapping wherever the line happens to break. */
-.capabilities li {
-  display: flex;
-  gap: 18px;
-  align-items: baseline;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--line);
-  color: var(--paper-dim);
-  font-size: 0.85rem;
-  letter-spacing: 0.02em;
-}
-
-.capabilities li:nth-child(-n + 2) {
-  border-top: 1px solid var(--line);
-}
-
-.capabilities li span {
-  color: var(--signal);
-  font-family: var(--font-mono);
-  font-size: var(--t-micro);
-  letter-spacing: 0.08em;
-}
-
 .about-section {
   display: grid;
-  grid-template-columns: 0.38fr 0.24fr 0.38fr;
-  gap: clamp(38px, 5vw, 90px);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(28px, 3vw, 48px);
+  row-gap: clamp(28px, 3vw, 44px);
+  align-items: start;
 }
 
-.about-title h2 {
-  font-size: clamp(2.4rem, 4vw, 4.5rem);
+.about-title {
+  grid-column: 6 / -1;
+  grid-row: 1;
 }
 
 .about-copy {
-  max-width: 700px;
-  padding-top: 66px;
+  grid-column: 6 / -1;
+  grid-row: 2;
+  max-width: 760px;
 }
 
 .portrait {
+  grid-column: 1 / 5;
+  grid-row: 1 / span 2;
   align-self: start;
-  margin: 66px 0 0;
+  margin: 0;
 }
 
 .portrait img {
   display: block;
   width: 100%;
-  height: clamp(380px, 36vw, 560px);
+  height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: 50% 42%;
@@ -1012,19 +1030,11 @@ footer span:nth-child(2) {
 }
 
 footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   justify-self: end;
   text-decoration: none;
-}
-
-[data-reveal] {
-  opacity: 0.72;
-  transform: translateY(24px);
-  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
-}
-
-[data-reveal][data-visible] {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1048,8 +1058,9 @@ footer a {
     padding-inline-end: 0;
   }
 
-  .system-figure {
-    margin: 28px auto 52px;
+  .hero-visual {
+    width: min(88vw, 560px);
+    margin: 12px auto 44px;
   }
 }
 
@@ -1064,6 +1075,14 @@ footer a {
 
   .section-intro {
     grid-template-columns: 0.35fr 0.65fr;
+  }
+
+  .section-intro > p:first-child {
+    grid-column: 1;
+  }
+
+  .section-intro h2 {
+    grid-column: 2;
   }
 
   .section-intro > p:last-child {
@@ -1093,9 +1112,32 @@ footer a {
     grid-column: 2 / -1;
   }
 
-  .method-section,
+  .creative-system,
   .about-section {
     grid-template-columns: 1fr;
+  }
+
+  .creative-system-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .method-heading h2 {
+    grid-column: 4 / -1;
+  }
+
+  .method-track {
+    grid-template-columns: 1fr;
+  }
+
+  .about-section {
+    row-gap: 32px;
+  }
+
+  .about-title,
+  .portrait,
+  .about-copy {
+    grid-column: 1;
+    grid-row: auto;
   }
 
   /* Once the about grid is a single column the portrait has no width limit,
@@ -1103,19 +1145,19 @@ footer a {
      Cap the width and let the 4:5 ratio drive the height instead. */
   .portrait {
     width: min(52vw, 360px);
-    margin: 46px 0 0;
+    margin: 0;
   }
 
   .portrait img {
     height: auto;
   }
 
-  .method-heading {
-    position: static;
+  .about-copy {
+    padding-top: 0;
   }
 
-  .capabilities {
-    grid-template-columns: 0.3fr 0.7fr;
+  .creative-system {
+    gap: 40px;
   }
 }
 
@@ -1134,12 +1176,22 @@ footer a {
 
   .site-nav {
     gap: clamp(12px, 4vw, 18px);
+    min-width: 0;
   }
 
   .site-nav a:nth-child(2),
   .location,
   .identity > span:last-child {
     display: none;
+  }
+
+  .lang-switch [aria-current="true"],
+  .lang-switch span {
+    display: none;
+  }
+
+  .lang-switch {
+    gap: 0;
   }
 
   .hero {
@@ -1162,15 +1214,20 @@ footer a {
     font-size: 0.97rem;
   }
 
-  .system-figure {
-    display: none;
+  .hero-visual {
+    width: 100%;
+    margin: 8px auto 28px;
+  }
+
+  .hero-work--primary {
+    width: 100%;
   }
 
   /* Keep the outer cells flush with the column and drop the trailing rule.
      The old group selector re-armed border-right on :last-child, leaving a
      vertical line dangling off the right edge with nothing after it. */
   .proof-strip div {
-    min-height: 76px;
+    min-height: 88px;
     padding: 12px 10px;
   }
 
@@ -1188,14 +1245,16 @@ footer a {
   }
 
   .proof-strip dt {
-    font-size: 0.53rem;
+    font-size: var(--t-micro);
+    line-height: 1.35;
   }
 
+  .creative-section,
+  .creative-system,
   .work-section,
   .method-section,
-  .capabilities,
   .about-section {
-    padding: 52px 0 0;
+    padding: 44px 0 0;
   }
 
   .about-section {
@@ -1207,8 +1266,69 @@ footer a {
     margin-bottom: 38px;
   }
 
+  .section-intro > p:first-child,
+  .section-intro > p:last-child,
+  .creative-system-heading > p:first-child,
+  .creative-system-heading > p:last-child {
+    padding-top: 0;
+  }
+
   .section-intro > p:last-child {
     margin-top: 24px;
+  }
+
+  .creative-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .creative-piece > a {
+    aspect-ratio: 1 / 1;
+  }
+
+  .creative-piece--storefront > a {
+    aspect-ratio: 43 / 90;
+  }
+
+  .creative-piece--collections > a,
+  .creative-piece--pagan > a,
+  .creative-piece--journal > a {
+    aspect-ratio: 4 / 3;
+  }
+
+  .creative-piece--storefront {
+    width: 100%;
+  }
+
+  .creative-piece figcaption {
+    display: block;
+  }
+
+  .creative-piece figcaption span {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .creative-system-track li {
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    min-height: auto;
+    padding: 22px 16px;
+  }
+
+  .creative-system-heading {
+    display: block;
+  }
+
+  .creative-system-heading > p:last-child {
+    margin-top: 24px;
+  }
+
+  .creative-system-track {
+    grid-template-columns: 1fr;
+  }
+
+  .creative-system-track p {
+    grid-column: 2;
   }
 
   .project {
@@ -1246,37 +1366,30 @@ footer a {
     margin-top: 30px;
   }
 
-  .method-section {
-    gap: 36px;
+  .method-heading {
+    display: block;
+    margin-bottom: 34px;
+  }
+
+  .method-heading h2 {
+    max-width: none;
+  }
+
+  [lang="en"] .section-intro h2 span,
+  [lang="en"] .creative-system-heading h2 span,
+  [lang="en"] .method-heading h2 span,
+  [lang="en"] .about-title h2 span {
+    white-space: normal;
   }
 
   .method-track article {
     grid-template-columns: 38px 1fr;
     min-height: auto;
-    padding: 28px 0;
+    padding: 28px 14px;
   }
 
   .method-track p {
     grid-column: 2;
-  }
-
-  .capabilities {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  /* One column on phones: the second grid column would otherwise keep its
-     top border pair mid-list. */
-  .capabilities ul {
-    grid-template-columns: 1fr;
-  }
-
-  .capabilities li:nth-child(-n + 2) {
-    border-top: 0;
-  }
-
-  .capabilities li:first-child {
-    border-top: 1px solid var(--line);
   }
 
   .about-section {
@@ -1287,7 +1400,7 @@ footer a {
      single-column grid, which read as a mistake next to left-aligned copy. */
   .portrait {
     width: min(76vw, 330px);
-    margin: 28px auto 12px;
+    margin: 0 auto;
   }
 
   .portrait img {
@@ -1295,7 +1408,7 @@ footer a {
   }
 
   .about-copy {
-    padding-top: 18px;
+    padding-top: 0;
   }
 
   .contact-section {
@@ -1328,10 +1441,6 @@ footer a {
     transition-duration: 0.01ms !important;
   }
 
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -1354,17 +1463,18 @@ footer a {
 
 [lang="he"] .role-line,
 [lang="he"] .section-intro > p:first-child,
+[lang="he"] .creative-system-heading > p:first-child,
 [lang="he"] .method-heading > p,
 [lang="he"] .about-title > p,
 [lang="he"] .contact-section > p:first-child,
 [lang="he"] .field-label,
 [lang="he"] .project-heading p,
 [lang="he"] .project-evidence figcaption,
+[lang="he"] .creative-piece figcaption span,
 [lang="he"] .proof-strip dt,
 [lang="he"] .method-track span,
-[lang="he"] .system-map li span,
-[lang="he"] .map-core span,
-[lang="he"] .map-core strong {
+[lang="he"] .creative-system-track span,
+[lang="he"] .hero-work figcaption span {
   font-family: var(--font-body);
   font-weight: 600;
   letter-spacing: normal;
@@ -1379,16 +1489,16 @@ footer a {
 [lang="he"] .text-action,
 [lang="he"] .project-link,
 [lang="he"] .primary-action,
-[lang="he"] .contact-action,
-[lang="he"] .capabilities h2,
-[lang="he"] .capabilities li {
+[lang="he"] .contact-action {
   letter-spacing: normal;
 }
 
 /* Measured values keep the instrument voice. Only words leave it. */
 [lang="he"] .proof-strip dd,
 [lang="he"] .project-index,
-[lang="he"] .capabilities li span {
+[lang="he"] .creative-system-track span,
+[lang="he"] .hero-work figcaption span,
+[lang="he"] .creative-piece figcaption span {
   font-family: var(--font-mono);
 }
 
@@ -1437,7 +1547,11 @@ footer a {
 }
 
 .lang-switch a {
-  padding: 4px 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   text-decoration: none;
   transition: color 160ms ease;
 }

@@ -1,6 +1,6 @@
 # vitalymatsevich.com
 
-Personal portfolio for Vitaly Matsevich, covering ecommerce operations, Shopify, Etsy, and practical AI workflows.
+Personal portfolio for Vitaly Matsevich, covering e-commerce creative direction, operations, Shopify, Etsy, and practical AI workflows.
 
 Plain static files, no build step. Hosted on GitHub Pages from `main` at the repository root, with the custom domain set by the `CNAME` file. Pushing to `main` deploys in about a minute.
 
@@ -20,7 +20,7 @@ python -m http.server 8000
 
 ## Editing content
 
-All copy and markup live directly in `index.html`. The project cards and the contact buttons are deliberately plain HTML rather than JavaScript, because link preview scrapers, some recruiter tools, and any JavaScript-free view need to see them. `app.js` only handles the footer year, the header scroll state, and the scroll reveal, all of which are progressive enhancement.
+All copy and markup live directly in `index.html`. The project cards and the contact buttons are deliberately plain HTML rather than JavaScript, because link preview scrapers, some recruiter tools, and any JavaScript-free view need to see them. `app.js` only handles the footer year and the header scroll state, both of which are progressive enhancement.
 
 ## Regenerating the social preview image
 
@@ -51,4 +51,4 @@ Open the result and check that the name is set in Unbounded. Webfonts failing to
 ## Still needed
 
 - Downloadable CV as a PDF, since recruiters forward files rather than links
-- Case study assets for the AI workflow project and The Hollow Journal
+- Deeper case study assets for the AI workflow process and The Hollow Journal

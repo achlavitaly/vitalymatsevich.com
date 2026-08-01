@@ -1,8 +1,8 @@
 # Design system: vitalymatsevich.com
 
-**North star: the operational field manual.**
+**North star: the creative operator's field manual.**
 
-The site argues that ecommerce work is one connected operating system rather than a résumé checklist. Its world is a near-black working surface marked with warm paper type, oxidized-copper signals, ruled evidence bands, and a lifecycle dial built from operational notation.
+The site argues that commercial creative and e-commerce operations are one connected practice rather than separate résumé categories. Its world is a near-black working surface marked with warm paper type, oxidized-copper signals, ruled evidence bands, and real work from live brands.
 
 ## Typography
 
@@ -36,21 +36,22 @@ Because that section inverts the palette, anything placed on it must invert too:
 
 ## Motion
 
-**One authored moment: the lifecycle dial.** It is the page's argument, so it is the only element that earns a loop. Two ruled tick bands drift in opposite directions at instrument speed while a copper signal walks the seven stages in order, so the diagram reads as a cycle that is running rather than a labelled circle.
+The work is the authored moment. The opening composition and gallery use real commercial assets. Nothing loops or enters automatically.
 
-Everything else is quiet feedback: arrows translate 4px, actions scale to 97%, project rows and method steps reveal once on entry.
+Everything else is quiet feedback: arrows translate 4px and actions scale to 97%.
 
 Rules that must hold:
 
-- The loop pauses when scrolled offscreen, driven by `app.js`. It runs by default, so a failed script costs animation and never a broken diagram.
 - Reduced motion must clear `animation-delay` as well as duration. A stagger otherwise holds elements in their start state for the full delay, which is the thing being opted out of.
 - Nothing animates layout. Transform, colour and shadow only.
 
 ## Layout
 
-Content is capped at 1460px. Sections are separated by deep vertical pauses and organised by hairline rules rather than cards or panels.
+Content is capped at 1460px. Sections are separated by deliberate but compact vertical pauses and organised by hairline rules rather than cards or panels.
 
-**The dial needs a wider column than the dial itself.** Its labels ride outside the rings, so the map is sized `min(100% - 140px, 340px)` to reserve that room. Sizing it to fill its column clips the easternmost label against `main`'s overflow clip, silently, at some widths and not others. Verify label fit at 1440, 1280, 1041, 1040, 430 and 360 after any change here.
+The hero pairs the positioning statement with one Fox and Raven product mockup. It establishes the visual world without competing with the creative gallery below. On phones the composition stays visible instead of disappearing, because visual evidence is the point of the page.
+
+The portfolio gallery is asymmetrical on larger screens and becomes one continuous column on phones. Captions describe the commercial role of each asset rather than decorating it with aesthetic language.
 
 **The portrait is centred on phones and ratio-driven below 1040px.** An explicit height plus a full-width column letterboxes a square source; `height: auto` lets the declared 4:5 ratio take over.
 
@@ -60,5 +61,5 @@ Content is capped at 1460px. Sections are separated by deep vertical pauses and 
 - Set prose in the monospace, or metrics in the body face.
 - Convert project evidence into rounded cards.
 - Add gradients, glass, or shadows outside the scrolled header.
-- Use circles for anything but the system diagram; here a circle means a connected system.
-- Add decorative motion beside the dial. If a second thing loops, the dial stops being the moment.
+- Use rounded cards, pills, or interface chrome around the work.
+- Add decorative loops. Motion should help the visitor notice evidence, then stop.
