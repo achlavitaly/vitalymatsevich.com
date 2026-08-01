@@ -7,9 +7,15 @@ if (yearTarget) {
 
 const header = document.querySelector("[data-header]");
 if (header) {
-  const updateHeader = () => header.toggleAttribute("data-scrolled", window.scrollY > 24);
-  updateHeader();
-  window.addEventListener("scroll", updateHeader, { passive: true });
+  let headerFramePending = false;
+  window.addEventListener("scroll", () => {
+    if (headerFramePending) return;
+    headerFramePending = true;
+    requestAnimationFrame(() => {
+      header.toggleAttribute("data-scrolled", window.scrollY > 24);
+      headerFramePending = false;
+    });
+  }, { passive: true });
 }
 
 // The dial's tick bands answer the scroll instead of idling on a clock. Their

@@ -4,6 +4,14 @@ Personal portfolio for Vitaly Matsevich, covering ecommerce operations, Shopify,
 
 Plain static files, no build step. Hosted on GitHub Pages from `main` at the repository root, with the custom domain set by the `CNAME` file. Pushing to `main` deploys in about a minute.
 
+The production pages load the minified `styles.min.css`. After changing the readable `styles.css` source, regenerate it with:
+
+```
+npx --package clean-css-cli cleancss -o styles.min.css styles.css
+```
+
+The site self-hosts its Google Fonts subsets under `fonts/`, together with their SIL Open Font License files. This avoids an external render-blocking stylesheet while preserving the existing typography.
+
 ## Local preview
 
 ```

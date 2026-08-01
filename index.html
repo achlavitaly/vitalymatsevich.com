@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -29,10 +29,7 @@
     <link rel="alternate" hreflang="he" href="https://vitalymatsevich.com/he/">
     <link rel="alternate" hreflang="x-default" href="https://vitalymatsevich.com/">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.min.css">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -108,7 +105,7 @@
             Explore selected work
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg>
           </a>
-          <dl class="proof-strip" aria-label="Verified results">
+          <dl class="proof-strip">
             <div><dt>Etsy sales</dt><dd>5,000<span>+</span></dd></div>
             <div><dt>Customer rating</dt><dd>5.0</dd></div>
             <div><dt>Reviews</dt><dd>≈1,500</dd></div>
@@ -164,7 +161,7 @@
             <p class="project-summary"><span class="field-label">Problem</span>Build and scale a print-on-demand business while keeping product quality, order execution, and customer trust connected across several platforms.</p>
             <div class="project-system">
               <span class="field-label">System built</span>
-              <ul class="outcomes" aria-label="Teezaro system">
+              <ul class="outcomes">
                 <li>Niche and product research</li>
                 <li>Catalog and listing production</li>
                 <li>Fulfillment and support workflows</li>
@@ -175,7 +172,13 @@
               <p><span class="field-label">Evidence</span>5,000+ sales · 5.0 rating · ≈1,500 reviews.</p>
             </div>
             <figure class="project-evidence">
-              <img src="assets/teezaro-evidence.png" alt="Teezaro Etsy Shop Manager showing 5,056 sales, a 5.0 rating from 1,486 reviews, and year-to-date shop performance." width="2800" height="1100" loading="lazy" decoding="async">
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="assets/teezaro-evidence-640.webp 640w, assets/teezaro-evidence-1280.webp 1280w, assets/teezaro-evidence-1920.webp 1920w"
+                  sizes="(max-width: 680px) calc(100vw - 62px), (max-width: 1040px) calc(100vw - 86px), min(88vw, 1285px)">
+                <img src="assets/teezaro-evidence.png" alt="Teezaro Etsy Shop Manager showing 5,056 sales, a 5.0 rating from 1,486 reviews, and year-to-date shop performance." width="2800" height="1100" loading="lazy" decoding="async">
+              </picture>
               <figcaption>Verified historical Etsy Shop Manager evidence · Teezaro · 5,056 sales · 1,486 reviews</figcaption>
             </figure>
           </article>
@@ -190,7 +193,7 @@
             <p class="project-summary"><span class="field-label">Problem</span>Turn a broad catalog of strange natural-history apparel into an owned brand with a coherent point of view and a store that can operate as one system.</p>
             <div class="project-system">
               <span class="field-label">System built</span>
-              <ul class="outcomes" aria-label="Hush Hollow system">
+              <ul class="outcomes">
                 <li>Positioning and visual rules</li>
                 <li>Shopify and collection architecture</li>
                 <li>Pricing and three-tee offer</li>
@@ -213,7 +216,7 @@
           <p>How I work</p>
           <h2 id="method-title">See the whole system. Fix the real constraint.</h2>
         </div>
-        <div class="method-track" aria-label="Working method">
+        <div class="method-track">
           <article>
             <span>01</span>
             <h3>Map the operation</h3>
@@ -240,11 +243,11 @@
       <section class="capabilities" aria-labelledby="capabilities-title">
         <h2 id="capabilities-title">Useful across the ecommerce lifecycle</h2>
         <ul>
-          <li><span>01</span>Shopify & Etsy operations</li>
+          <li><span>01</span>Shopify &amp; Etsy operations</li>
           <li><span>02</span>Catalog architecture</li>
           <li><span>03</span>Product research</li>
           <li><span>04</span>Print-on-demand workflows</li>
-          <li><span>05</span>Pricing & offer design</li>
+          <li><span>05</span>Pricing &amp; offer design</li>
           <li><span>06</span>Customer experience</li>
           <li><span>07</span>Fulfillment troubleshooting</li>
           <li><span>08</span>AI-assisted production</li>
@@ -297,6 +300,6 @@
       <a href="#top">Back to top ↑</a>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
   <head>
     <meta charset="utf-8">
@@ -29,10 +29,7 @@
     <link rel="alternate" hreflang="he" href="https://vitalymatsevich.com/he/">
     <link rel="alternate" hreflang="x-default" href="https://vitalymatsevich.com/">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;600&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../styles.min.css">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -109,7 +106,7 @@
             לעבודות נבחרות
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg>
           </a>
-          <dl class="proof-strip" aria-label="תוצאות מאומתות">
+          <dl class="proof-strip">
             <div><dt>מכירות באטסי</dt><dd>5,000<span>+</span></dd></div>
             <div><dt>דירוג לקוחות</dt><dd>5.0</dd></div>
             <div><dt>ביקורות</dt><dd>≈1,500</dd></div>
@@ -167,7 +164,7 @@
             <p class="project-summary"><span class="field-label">האתגר</span>לבנות ולהרחיב עסק הדפסה לפי דרישה, ובמקביל לשמור על איכות המוצר, על ביצוע ההזמנות ועל אמון הלקוחות כשכולם מחוברים יחד בכמה פלטפורמות.</p>
             <div class="project-system">
               <span class="field-label">המערכת שנבנתה</span>
-              <ul class="outcomes" aria-label="המערכת של Teezaro">
+              <ul class="outcomes">
                 <li>מחקר נישה ומוצר</li>
                 <li>הפקת קטלוג ודפי מוצר</li>
                 <li>תהליכי שילוח ותמיכה</li>
@@ -178,7 +175,13 @@
               <p><span class="field-label">הוכחה</span>יותר מ-5,000 מכירות · דירוג 5.0 · כ-1,500 ביקורות.</p>
             </div>
             <figure class="project-evidence">
-              <img src="../assets/teezaro-evidence.png" alt="ממשק Etsy Shop Manager של Teezaro: 5,056 מכירות, דירוג 5.0 מתוך 1,486 ביקורות, וביצועי החנות מתחילת השנה." width="2800" height="1100" loading="lazy" decoding="async">
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="../assets/teezaro-evidence-640.webp 640w, ../assets/teezaro-evidence-1280.webp 1280w, ../assets/teezaro-evidence-1920.webp 1920w"
+                  sizes="(max-width: 680px) calc(100vw - 62px), (max-width: 1040px) calc(100vw - 86px), min(88vw, 1285px)">
+                <img src="../assets/teezaro-evidence.png" alt="ממשק Etsy Shop Manager של Teezaro: 5,056 מכירות, דירוג 5.0 מתוך 1,486 ביקורות, וביצועי החנות מתחילת השנה." width="2800" height="1100" loading="lazy" decoding="async">
+              </picture>
               <figcaption>צילום מסך מתוך Etsy Shop Manager · Teezaro · 5,056 מכירות · 1,486 ביקורות</figcaption>
             </figure>
           </article>
@@ -193,7 +196,7 @@
             <p class="project-summary"><span class="field-label">האתגר</span>להפוך קטלוג רחב של ביגוד בהשראת היסטוריית הטבע למותג עצמאי עם נקודת מבט אחידה, ולחנות שמתפקדת כמערכת אחת.</p>
             <div class="project-system">
               <span class="field-label">המערכת שנבנתה</span>
-              <ul class="outcomes" aria-label="המערכת של Hush Hollow">
+              <ul class="outcomes">
                 <li>מיצוב וכללים ויזואליים</li>
                 <li>ארכיטקטורת שופיפיי וקולקציות</li>
                 <li>תמחור והצעת שלוש חולצות</li>
@@ -216,7 +219,7 @@
           <p>איך אני עובד</p>
           <h2 id="method-title">לראות את כל המערכת. לתקן את המגבלה האמיתית.</h2>
         </div>
-        <div class="method-track" aria-label="שיטת העבודה">
+        <div class="method-track">
           <article>
             <span>01</span>
             <h3>למפות את התפעול</h3>
@@ -300,6 +303,6 @@
       <a href="#top">חזרה למעלה ↑</a>
     </footer>
 
-    <script src="../app.js"></script>
+    <script src="../app.js" defer></script>
   </body>
 </html>
