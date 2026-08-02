@@ -117,10 +117,10 @@
 
   /* Notation scale. The old file had 30 ad-hoc sizes between 0.53 and 1rem,
      many separated by 0.01rem and none perceptually distinct. Four steps. */
-  --t-micro: 0.68rem;
-  --t-note: 0.76rem;
-  --t-dense: 0.9rem;
-  --t-body: 1.02rem;
+  --t-micro: 0.76rem;
+  --t-note: 0.82rem;
+  --t-dense: 0.92rem;
+  --t-body: 1.04rem;
 }
 
 * {
@@ -224,13 +224,13 @@ a:focus-visible {
 
 .site-nav {
   display: flex;
-  gap: clamp(22px, 3vw, 48px);
+  gap: clamp(18px, 2vw, 34px);
 }
 
 .site-nav a,
 .location {
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   letter-spacing: 0.06em;
   text-decoration: none;
   transition: color 160ms ease;
@@ -286,8 +286,10 @@ section[id] {
 }
 
 .role-line,
+.snapshot-heading > p:first-child,
 .section-intro > p:first-child,
 .creative-system-heading > p:first-child,
+.role-fit-heading > p:first-child,
 .method-heading > p,
 .about-title > p,
 .contact-section > p:first-child {
@@ -419,7 +421,8 @@ h1 span {
 }
 
 .hero-work figcaption span,
-.creative-piece figcaption span {
+.creative-piece .creative-caption-label,
+.creative-piece .external-cue {
   color: var(--signal);
   font-family: var(--font-mono);
 }
@@ -471,14 +474,149 @@ h1 span {
   color: var(--signal);
 }
 
+.profile-snapshot,
 .creative-section,
 .creative-system,
 .work-section,
+.role-fit,
 .method-section,
 .about-section {
   width: var(--content);
   margin: 0 auto;
   padding: clamp(64px, 6vw, 88px) 0 0;
+}
+
+.profile-snapshot {
+  padding-top: clamp(58px, 6vw, 86px);
+}
+
+.snapshot-heading {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(22px, 3vw, 44px);
+  align-items: start;
+}
+
+.snapshot-heading > p:first-child {
+  grid-column: 1 / 3;
+  padding-top: 0.12rem;
+}
+
+.snapshot-heading h2 {
+  grid-column: 4 / 9;
+  max-width: 700px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 4.7rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+}
+
+.snapshot-heading h2 span {
+  display: block;
+}
+
+.snapshot-heading > p:not(:first-child) {
+  grid-column: 9 / -1;
+  max-width: 470px;
+  margin: 0;
+  color: var(--paper-dim);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: clamp(38px, 5vw, 64px);
+  border-top: 1px solid var(--line);
+  border-inline-start: 1px solid var(--line);
+}
+
+.snapshot-block {
+  min-width: 0;
+  min-height: 260px;
+  padding: 26px clamp(18px, 2vw, 30px);
+  border-inline-end: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.snapshot-block h3 {
+  margin: 0 0 28px;
+  color: var(--signal);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.snapshot-block > p,
+.snapshot-block dd,
+.snapshot-timeline p {
+  color: var(--paper-dim);
+  font-size: var(--t-dense);
+  line-height: 1.65;
+}
+
+.snapshot-block > p {
+  margin: 0;
+}
+
+.snapshot-timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.snapshot-timeline li + li {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.snapshot-dates {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  direction: ltr;
+}
+
+.snapshot-timeline strong {
+  display: block;
+  margin-top: 9px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.snapshot-timeline p {
+  margin: 4px 0 0;
+}
+
+.snapshot-block dl {
+  margin: 0;
+}
+
+.snapshot-block dl div + div {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.snapshot-block dt {
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+}
+
+.snapshot-block dd {
+  margin: 0;
 }
 
 .about-section {
@@ -557,6 +695,7 @@ h1 span {
   place-items: center;
   border: 1px solid var(--line);
   background: #171511;
+  transition: border-color 220ms ease;
 }
 
 .creative-piece img {
@@ -582,10 +721,20 @@ h1 span {
   border-top: 1px solid var(--line);
 }
 
-.creative-piece figcaption span {
+.creative-caption-label {
   flex: 0 0 auto;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.creative-caption-copy {
+  min-width: 0;
+  text-align: end;
+}
+
+.external-cue {
+  display: inline-block;
+  transition: transform 180ms var(--ease-out);
 }
 
 .gallery-link {
@@ -663,7 +812,7 @@ h1 span {
   grid-column: 2;
   margin: 0;
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: var(--t-dense);
   line-height: 1.65;
 }
 
@@ -755,7 +904,7 @@ h1 span {
   padding: 10px 0;
   border-bottom: 1px solid var(--line);
   color: var(--muted);
-  font-size: 0.74rem;
+  font-size: var(--t-note);
 }
 
 .outcomes li:first-child {
@@ -777,7 +926,7 @@ h1 span {
   max-width: 600px;
   margin: 0;
   color: var(--muted);
-  font-size: 0.73rem;
+  font-size: var(--t-note);
 }
 
 .field-label {
@@ -839,6 +988,154 @@ h1 span {
   letter-spacing: 0.08em;
   line-height: 1.6;
   text-transform: uppercase;
+}
+
+.project-evidence--hush .project-evidence-link {
+  cursor: pointer;
+}
+
+.role-fit {
+  padding-bottom: clamp(10px, 2vw, 28px);
+}
+
+.role-fit-heading {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(22px, 3vw, 44px);
+  align-items: start;
+}
+
+.role-fit-heading > p:first-child {
+  grid-column: 1 / 3;
+  padding-top: 0.12rem;
+}
+
+.role-fit-heading h2 {
+  grid-column: 4 / 9;
+  max-width: 760px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 4.7rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+}
+
+.role-fit-heading > p:last-child {
+  grid-column: 9 / -1;
+  max-width: 520px;
+  margin: 0;
+  color: var(--paper-dim);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.role-fit-table {
+  margin-top: clamp(44px, 6vw, 80px);
+  border-top: 1px solid var(--line);
+}
+
+.role-fit-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.44fr) minmax(0, 0.56fr);
+  gap: clamp(28px, 5vw, 90px);
+  align-items: center;
+  padding: clamp(28px, 3vw, 42px) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.role-fit-row--header {
+  padding: 14px 0;
+}
+
+.role-fit-row--header span {
+  color: var(--signal);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.role-fit-row h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 2.5vw, 2.9rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+}
+
+.role-fit-row p {
+  margin: 0;
+  color: var(--paper-dim);
+  font-size: clamp(1rem, 1.35vw, 1.22rem);
+  line-height: 1.62;
+}
+
+.role-fit-process {
+  margin-top: clamp(34px, 4vw, 56px);
+}
+
+.role-fit-process ol {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 48px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.role-fit-process li {
+  position: relative;
+  color: var(--paper-dim);
+  font-family: var(--font-mono);
+  font-size: var(--t-note);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.role-fit-process li:first-child {
+  color: var(--muted);
+}
+
+.role-fit-process li:not(:last-child)::after {
+  position: absolute;
+  inset-inline-end: calc(clamp(18px, 3vw, 48px) * -0.65);
+  color: var(--line-strong);
+  content: "→";
+}
+
+[dir="rtl"] .role-fit-process li:not(:last-child)::after {
+  content: "←";
+}
+
+.role-fit-process li span {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--signal);
+  font-size: var(--t-micro);
+}
+
+.role-fit-process li:first-child span {
+  color: var(--muted);
+}
+
+.role-fit-process > p {
+  margin: 28px 0 0;
+  color: var(--paper-dim);
+  font-size: var(--t-dense);
+  line-height: 1.65;
+}
+
+.role-fit-statement {
+  max-width: 1160px;
+  margin: clamp(44px, 6vw, 78px) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 4.5vw, 5.2rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
 }
 
 .method-section {
@@ -911,7 +1208,7 @@ h1 span {
 .method-track p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.87rem;
+  font-size: var(--t-dense);
   line-height: 1.7;
 }
 
@@ -954,7 +1251,7 @@ h1 span {
 .portrait figcaption {
   margin-top: 12px;
   color: var(--muted);
-  font-size: 0.65rem;
+  font-size: var(--t-micro);
 }
 
 .about-copy p {
@@ -1045,7 +1342,7 @@ footer {
   margin: 0 auto;
   align-items: center;
   color: var(--muted);
-  font-size: 0.7rem;
+  font-size: var(--t-micro);
 }
 
 footer span:nth-child(2) {
@@ -1073,6 +1370,19 @@ footer a {
     border-color: var(--project-color);
     filter: saturate(0.92) contrast(1.04);
   }
+
+  .creative-piece > a:hover {
+    border-color: var(--signal);
+  }
+
+  .creative-piece > a:hover img {
+    filter: saturate(1.04) contrast(1.05) brightness(1.06);
+  }
+
+  .creative-piece > a:hover + figcaption .external-cue {
+    transform: translate(3px, -3px);
+  }
+
 }
 
 @media (max-width: 1180px) {
@@ -1116,6 +1426,35 @@ footer a {
   .section-intro > p:last-child {
     grid-column: 2;
     margin: 28px 0 0;
+  }
+
+  .snapshot-heading,
+  .role-fit-heading {
+    grid-template-columns: 0.35fr 0.65fr;
+  }
+
+  .snapshot-heading > p:first-child,
+  .role-fit-heading > p:first-child {
+    grid-column: 1;
+  }
+
+  .snapshot-heading h2,
+  .role-fit-heading h2 {
+    grid-column: 2;
+  }
+
+  .snapshot-heading > p:not(:first-child),
+  .role-fit-heading > p:last-child {
+    grid-column: 2;
+  }
+
+  .snapshot-heading > p:not(:first-child),
+  .role-fit-heading > p:last-child {
+    margin-top: 28px;
+  }
+
+  .snapshot-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .project {
@@ -1203,11 +1542,11 @@ footer a {
   }
 
   .site-nav {
-    gap: clamp(12px, 4vw, 18px);
+    gap: clamp(6px, 2.4vw, 10px);
     min-width: 0;
   }
 
-  .site-nav a:nth-child(2),
+  .site-nav .nav-secondary,
   .location,
   .identity > span:last-child {
     display: none;
@@ -1277,9 +1616,11 @@ footer a {
     line-height: 1.35;
   }
 
+  .profile-snapshot,
   .creative-section,
   .creative-system,
   .work-section,
+  .role-fit,
   .method-section,
   .about-section {
     padding: 44px 0 0;
@@ -1292,6 +1633,36 @@ footer a {
   .section-intro {
     display: block;
     margin-bottom: 38px;
+  }
+
+  .snapshot-heading,
+  .role-fit-heading {
+    display: block;
+  }
+
+  .snapshot-heading > p:first-child,
+  .role-fit-heading > p:first-child {
+    padding-top: 0;
+  }
+
+  .snapshot-heading > p:not(:first-child),
+  .role-fit-heading > p:last-child {
+    margin-top: 24px;
+  }
+
+  .snapshot-heading h2,
+  .role-fit-heading h2 {
+    font-size: 2.4rem;
+  }
+
+  .snapshot-grid {
+    grid-template-columns: 1fr;
+    margin-top: 38px;
+  }
+
+  .snapshot-block {
+    min-height: auto;
+    padding: 24px 18px;
   }
 
   .section-intro > p:first-child,
@@ -1331,9 +1702,14 @@ footer a {
     display: block;
   }
 
-  .creative-piece figcaption span {
+  .creative-piece figcaption .creative-caption-label {
     display: block;
     margin-bottom: 4px;
+  }
+
+  .creative-caption-copy {
+    display: block;
+    text-align: start;
   }
 
   .creative-system-track li {
@@ -1392,6 +1768,51 @@ footer a {
     flex-direction: column;
     gap: 24px;
     margin-top: 30px;
+  }
+
+  .role-fit-table {
+    margin-top: 38px;
+  }
+
+  .role-fit-row--header {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .role-fit-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 24px 0;
+  }
+
+  .role-fit-row h3 {
+    font-size: 2rem;
+  }
+
+  .role-fit-process {
+    margin-top: 34px;
+  }
+
+  .role-fit-process ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 18px;
+  }
+
+  .role-fit-process li:not(:last-child)::after,
+  [dir="rtl"] .role-fit-process li:not(:last-child)::after {
+    content: none;
+  }
+
+  .role-fit-statement {
+    margin-top: 42px;
+    font-size: 2.45rem;
   }
 
   .method-heading {
@@ -1490,8 +1911,10 @@ footer a {
 }
 
 [lang="he"] .role-line,
+[lang="he"] .snapshot-heading > p:first-child,
 [lang="he"] .section-intro > p:first-child,
 [lang="he"] .creative-system-heading > p:first-child,
+[lang="he"] .role-fit-heading > p:first-child,
 [lang="he"] .method-heading > p,
 [lang="he"] .about-title > p,
 [lang="he"] .contact-section > p:first-child,
@@ -1499,7 +1922,11 @@ footer a {
 [lang="he"] .project-heading p,
 [lang="he"] .project-evidence figcaption,
 [lang="he"] .project-evidence-view,
-[lang="he"] .creative-piece figcaption span,
+[lang="he"] .creative-caption-label,
+[lang="he"] .snapshot-block h3,
+[lang="he"] .snapshot-dates,
+[lang="he"] .role-fit-row--header span,
+[lang="he"] .role-fit-process li,
 [lang="he"] .proof-strip dt,
 [lang="he"] .method-track span,
 [lang="he"] .creative-system-track span,
@@ -1526,9 +1953,12 @@ footer a {
 [lang="he"] .proof-strip dd,
 [lang="he"] .project-index,
 [lang="he"] .creative-system-track span,
-[lang="he"] .hero-work figcaption span,
-[lang="he"] .creative-piece figcaption span {
+[lang="he"] .hero-work figcaption span {
   font-family: var(--font-mono);
+}
+
+[lang="he"] .snapshot-dates {
+  direction: rtl;
 }
 
 /* A figure is one left-to-right run even inside Hebrew. Without this the
@@ -1546,6 +1976,10 @@ footer a {
 }
 
 [lang="he"] .section-intro h2,
+[lang="he"] .snapshot-heading h2,
+[lang="he"] .role-fit-heading h2,
+[lang="he"] .role-fit-row h3,
+[lang="he"] .role-fit-statement,
 [lang="he"] .method-heading h2,
 [lang="he"] .about-title h2,
 [lang="he"] .contact-section h2,
