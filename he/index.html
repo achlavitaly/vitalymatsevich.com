@@ -31,6 +31,8 @@
     <link rel="alternate" hreflang="x-default" href="https://vitalymatsevich.com/">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="preload" href="../fonts/frank-ruhl-libre-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/ibm-plex-sans-hebrew-400-hebrew.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../styles.min.css">
     <script type="application/ld+json">
       {
@@ -130,7 +132,10 @@
         <div class="hero-visual">
           <figure class="hero-work hero-work--primary">
             <a href="https://thehushhollow.com/products/fox-and-raven-moonlit-wreath" target="_blank" rel="noopener noreferrer" aria-label="פתיחת דף המוצר Fox and Raven בחנות Hush Hollow">
-              <img src="../assets/fox-raven.webp" srcset="../assets/fox-raven-480.webp 480w, ../assets/fox-raven-640.webp 640w, ../assets/fox-raven-768.webp 768w, ../assets/fox-raven-960.webp 960w, ../assets/fox-raven.webp 1920w" sizes="(max-width: 680px) 76vw, (max-width: 1180px) 69vw, 520px" alt="איור של שועל ועורב בסגנון היסטוריית הטבע על הדמיית חולצה" width="1920" height="1920" decoding="async" fetchpriority="high">
+              <picture>
+                <source media="(max-width: 680px)" type="image/avif" srcset="../assets/fox-raven-480.avif 480w, ../assets/fox-raven-640.avif 640w, ../assets/fox-raven-768.avif 768w" sizes="76vw">
+                <img src="../assets/fox-raven.webp" srcset="../assets/fox-raven-480.webp 480w, ../assets/fox-raven-640.webp 640w, ../assets/fox-raven-768.webp 768w, ../assets/fox-raven-960.webp 960w, ../assets/fox-raven.webp 1920w" sizes="(max-width: 680px) 76vw, (max-width: 1180px) 69vw, 520px" alt="איור של שועל ועורב בסגנון היסטוריית הטבע על הדמיית חולצה" width="1920" height="1920" decoding="async" fetchpriority="high">
+              </picture>
             </a>
             <figcaption><span>01</span> עולם מוצר</figcaption>
           </figure>
@@ -336,15 +341,15 @@
             <span role="columnheader">מה באחריותי</span>
           </div>
           <div class="role-fit-row" role="row">
-            <h3 role="rowheader">ניהול קריאייטיב ותפעול</h3>
+            <div role="rowheader"><h3>ניהול קריאייטיב ותפעול</h3></div>
             <p role="cell">קונספטים, בריפים, סטנדרטים להפקה, בקרת נכסים ואישור לפרסום.</p>
           </div>
           <div class="role-fit-row" role="row">
-            <h3 role="rowheader">תפעול Shopify</h3>
+            <div role="rowheader"><h3>תפעול Shopify</h3></div>
             <p role="cell">עדכוני חנות, מבצעים, אפליקציות, תהליך התשלום ובקרת איכות לפני העלאה לאוויר.</p>
           </div>
           <div class="role-fit-row" role="row">
-            <h3 role="rowheader">קטלוג ומרצ'נדייזינג</h3>
+            <div role="rowheader"><h3>קטלוג ומרצ'נדייזינג</h3></div>
             <p role="cell">נתוני מוצר, קולקציות, תמחור, מרצ'נדייזינג ועדכונים בכמות גדולה.</p>
           </div>
         </div>

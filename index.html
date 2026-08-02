@@ -31,6 +31,8 @@
     <link rel="alternate" hreflang="x-default" href="https://vitalymatsevich.com/">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="preload" href="fonts/frank-ruhl-libre-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.min.css">
     <script type="application/ld+json">
       {
@@ -129,7 +131,10 @@
         <div class="hero-visual">
           <figure class="hero-work hero-work--primary">
             <a href="https://thehushhollow.com/products/fox-and-raven-moonlit-wreath" target="_blank" rel="noopener noreferrer" aria-label="View Fox and Raven: Moonlit Wreath on Hush Hollow">
-              <img src="assets/fox-raven.webp" srcset="assets/fox-raven-480.webp 480w, assets/fox-raven-640.webp 640w, assets/fox-raven-768.webp 768w, assets/fox-raven-960.webp 960w, assets/fox-raven.webp 1920w" sizes="(max-width: 680px) 76vw, (max-width: 1180px) 69vw, 520px" alt="Fox and raven natural-history shirt artwork presented on a garment mockup" width="1920" height="1920" decoding="async" fetchpriority="high">
+              <picture>
+                <source media="(max-width: 680px)" type="image/avif" srcset="assets/fox-raven-480.avif 480w, assets/fox-raven-640.avif 640w, assets/fox-raven-768.avif 768w" sizes="76vw">
+                <img src="assets/fox-raven.webp" srcset="assets/fox-raven-480.webp 480w, assets/fox-raven-640.webp 640w, assets/fox-raven-768.webp 768w, assets/fox-raven-960.webp 960w, assets/fox-raven.webp 1920w" sizes="(max-width: 680px) 76vw, (max-width: 1180px) 69vw, 520px" alt="Fox and raven natural-history shirt artwork presented on a garment mockup" width="1920" height="1920" decoding="async" fetchpriority="high">
+              </picture>
             </a>
             <figcaption><span>01</span> Product world</figcaption>
           </figure>
@@ -335,15 +340,15 @@
             <span role="columnheader">What I own</span>
           </div>
           <div class="role-fit-row" role="row">
-            <h3 role="rowheader">Creative Direction &amp; Operations</h3>
+            <div role="rowheader"><h3>Creative Direction &amp; Operations</h3></div>
             <p role="cell">Concepts, briefs, production standards, asset review, and approval to publish.</p>
           </div>
           <div class="role-fit-row" role="row">
-            <h3 role="rowheader">Shopify Operations</h3>
+            <div role="rowheader"><h3>Shopify Operations</h3></div>
             <p role="cell">Storefront changes, promotions, apps, checkout, and release QA.</p>
           </div>
           <div class="role-fit-row" role="row">
-            <h3 role="rowheader">Catalog &amp; Merchandising</h3>
+            <div role="rowheader"><h3>Catalog &amp; Merchandising</h3></div>
             <p role="cell">Product data, collections, pricing, merchandising, and bulk updates.</p>
           </div>
         </div>
