@@ -121,6 +121,15 @@
   --t-note: 0.82rem;
   --t-dense: 0.92rem;
   --t-body: 1.04rem;
+
+  /* Spatial roles keep the field-manual cadence deliberate across sections.
+     Local gaps still vary where content relationships require it. */
+  --space-section: clamp(64px, 6vw, 88px);
+  --space-section-compact: clamp(58px, 6vw, 86px);
+  --space-heading-content: clamp(38px, 5vw, 64px);
+  --space-section-mobile: 48px;
+  --space-section-mobile-supporting: 56px;
+  --space-section-mobile-major: 64px;
 }
 
 * {
@@ -256,7 +265,7 @@ a:focus-visible {
 }
 
 main {
-  overflow: clip;
+  overflow-x: clip;
 }
 
 section[id] {
@@ -483,11 +492,11 @@ h1 span {
 .about-section {
   width: var(--content);
   margin: 0 auto;
-  padding: clamp(64px, 6vw, 88px) 0 0;
+  padding: var(--space-section) 0 0;
 }
 
 .profile-snapshot {
-  padding-top: clamp(58px, 6vw, 86px);
+  padding-top: var(--space-section-compact);
 }
 
 .snapshot-heading {
@@ -529,7 +538,7 @@ h1 span {
 .snapshot-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: clamp(38px, 5vw, 64px);
+  margin-top: var(--space-heading-content);
   border-top: 1px solid var(--line);
   border-inline-start: 1px solid var(--line);
 }
@@ -628,7 +637,7 @@ h1 span {
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: clamp(22px, 3vw, 44px);
   align-items: start;
-  margin-bottom: 62px;
+  margin-bottom: var(--space-heading-content);
 }
 
 .section-intro > p:first-child {
@@ -778,7 +787,7 @@ h1 span {
   column-gap: 0;
   row-gap: 0;
   margin: 0;
-  margin-top: clamp(38px, 5vw, 64px);
+  margin-top: var(--space-heading-content);
   padding: 0;
   border-top: 1px solid var(--line);
   border-inline-start: 1px solid var(--line);
@@ -1154,7 +1163,7 @@ h1 span {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: clamp(22px, 3vw, 44px);
-  margin-bottom: clamp(38px, 5vw, 64px);
+  margin-bottom: var(--space-heading-content);
 }
 
 .method-heading > p {
@@ -1387,6 +1396,21 @@ footer a {
 
 @media (max-width: 1180px) {
   .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(330px, 0.72fr);
+    gap: clamp(24px, 3vw, 40px);
+  }
+
+  .hero-copy {
+    padding-inline-end: clamp(12px, 2vw, 28px);
+  }
+
+  .hero-visual {
+    width: min(100%, 460px);
+  }
+}
+
+@media (max-width: 860px) {
+  .hero {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     min-height: auto;
@@ -1397,8 +1421,38 @@ footer a {
   }
 
   .hero-visual {
-    width: min(88vw, 560px);
+    width: min(76vw, 480px);
     margin: 12px auto 44px;
+  }
+}
+
+@media (max-width: 820px) {
+  .site-header {
+    /* Compact the persistent header before its three intrinsic groups can
+       collide. The main content keeps the tablet layout until 680px. */
+    grid-template-columns: auto 1fr auto;
+    column-gap: clamp(12px, 3.6vw, 16px);
+    min-height: 64px;
+  }
+
+  .site-nav {
+    gap: clamp(6px, 2.4vw, 10px);
+    min-width: 0;
+  }
+
+  .site-nav .nav-secondary,
+  .location,
+  .identity > span:last-child {
+    display: none;
+  }
+
+  .lang-switch [aria-current="true"],
+  .lang-switch span {
+    display: none;
+  }
+
+  .lang-switch {
+    gap: 0;
   }
 }
 
@@ -1533,34 +1587,6 @@ footer a {
     --content: calc(100% - 28px);
   }
 
-  .site-header {
-    /* Three cells stay on phones: the language switch has to survive even
-       though the location label does not. */
-    grid-template-columns: auto 1fr auto;
-    column-gap: clamp(12px, 3.6vw, 16px);
-    min-height: 64px;
-  }
-
-  .site-nav {
-    gap: clamp(6px, 2.4vw, 10px);
-    min-width: 0;
-  }
-
-  .site-nav .nav-secondary,
-  .location,
-  .identity > span:last-child {
-    display: none;
-  }
-
-  .lang-switch [aria-current="true"],
-  .lang-switch span {
-    display: none;
-  }
-
-  .lang-switch {
-    gap: 0;
-  }
-
   .hero {
     padding-top: 64px;
   }
@@ -1570,7 +1596,7 @@ footer a {
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: clamp(2.5rem, 10.4vw, 2.9rem);
   }
 
   h1 span {
@@ -1623,7 +1649,16 @@ footer a {
   .role-fit,
   .method-section,
   .about-section {
-    padding: 44px 0 0;
+    padding: var(--space-section-mobile) 0 0;
+  }
+
+  .creative-system {
+    padding-top: var(--space-section-mobile-supporting);
+  }
+
+  .creative-section,
+  .work-section {
+    padding-top: var(--space-section-mobile-major);
   }
 
   .about-section {
@@ -1656,13 +1691,18 @@ footer a {
   }
 
   .snapshot-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-top: 38px;
+  }
+
+  .snapshot-block--timeline,
+  .snapshot-block--details {
+    grid-column: 1 / -1;
   }
 
   .snapshot-block {
     min-height: auto;
-    padding: 24px 18px;
+    padding: 24px 16px;
   }
 
   .section-intro > p:first-child,
@@ -1747,6 +1787,10 @@ footer a {
   .project-foot,
   .project-evidence {
     grid-column: 2;
+  }
+
+  .project-evidence {
+    grid-column: 1 / -1;
   }
 
   .project-heading p {
@@ -1861,7 +1905,7 @@ footer a {
   }
 
   .contact-section {
-    padding-inline: 18px;
+    padding-inline: 14px;
   }
 
   footer {
@@ -1870,6 +1914,17 @@ footer a {
 
   footer span:nth-child(2) {
     display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .snapshot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .snapshot-block--timeline,
+  .snapshot-block--details {
+    grid-column: auto;
   }
 }
 
