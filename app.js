@@ -15,3 +15,20 @@ if (header) {
     });
   }, { passive: true });
 }
+
+const processFlow = document.querySelector(".role-fit-process");
+const motionAllowed = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (processFlow && motionAllowed && "IntersectionObserver" in window) {
+  document.documentElement.classList.add("motion-ready");
+
+  const processObserver = new IntersectionObserver((entries, observer) => {
+    const entry = entries[0];
+    if (!entry?.isIntersecting) return;
+
+    processFlow.classList.add("is-active");
+    observer.unobserve(processFlow);
+  }, { threshold: 0.35 });
+
+  processObserver.observe(processFlow);
+}
