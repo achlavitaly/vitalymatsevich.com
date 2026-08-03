@@ -1987,11 +1987,9 @@ footer a {
     line-height: 1.06;
   }
 
-  /* margin-left: auto used to shove this against the right edge of a
-     single-column grid, which read as a mistake next to left-aligned copy. */
   .portrait {
-    width: min(76vw, 330px);
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
   }
 
   .portrait img {

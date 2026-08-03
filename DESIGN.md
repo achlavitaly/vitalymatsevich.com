@@ -57,7 +57,7 @@ The full-width storefront caption keeps its label and explanation on opposite si
 
 Mobile spacing uses three relationships rather than one repeated pause: 32 pixels joins directly related sections, 42 pixels is the default section interval, and 56 pixels introduces a major body of work. The hero evidence flows into the profile snapshot, the gallery action flows into the method, and the role-fit conclusion flows into the About heading at the related interval. Role-fit rows reduce their display scale and mute supporting copy on phones. The closing role-fit statement is omitted below 680 pixels because it repeats the process conclusion and competes with the stronger About heading.
 
-**The portrait is centred on phones and ratio-driven below 1040px.** An explicit height plus a full-width column letterboxes a square source; `height: auto` lets the declared 4:5 ratio take over.
+**The portrait follows the full content width on phones and stays ratio-driven below 1040px.** The shared left edge keeps personal photography consistent with the project evidence above it. At tablet widths the portrait remains capped, while `height: auto` lets the declared 4:5 ratio control the crop.
 
 ## Do not
 
