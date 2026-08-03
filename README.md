@@ -32,6 +32,12 @@ Below 680 pixels the figure swaps to a portrait capture of the same dashboard. T
 
 The two captures were taken on different days, so their review counts and percentages differ slightly, and the `open full screenshot` link has to follow whichever one is on screen. `app.js` reads the image's `currentSrc` and points the link at the matching full size file, which ties the behaviour to the browser's own choice instead of repeating the breakpoint in script where it could drift from the markup. Without JavaScript the link keeps its landscape target, which is the behaviour it had before. If a single capture ever replaces both files, this can go; while they differ, the link must not open a screenshot that contradicts the one above it.
 
+Below 680 pixels, the hero and four creative-gallery images use one deliberately capped mobile source each: 480 pixels for the square or landscape pieces and 430 pixels for the tall storefront capture. The higher-density ladders remain available above that breakpoint. This keeps the mobile files close to their 382 pixel rendered slots instead of letting device pixel ratio select 640 to 1280 pixel screenshots whose interface detail is not legible at that display size anyway.
+
+Measured locally with Lighthouse 13.4.1 through headless Comet on 2026-08-03, three identical mobile runs against `origin/main` scored 98, 95 and 98, transferred 399.9 KiB each, reported 163.7 KiB of image-delivery savings, and had a median LCP of 2.41 seconds. The capped AVIF sources scored 98 in all three runs, transferred 263.3 KiB, reported zero image-delivery savings, and had a median LCP of 2.26 seconds. These are controlled local comparisons, not live PageSpeed results.
+
+GitHub Pages currently serves the CSS, fonts and images with `Cache-Control: max-age=600`. That ten-minute TTL is a hosting response header and cannot be changed by files in this repository. Raising it would require a CDN or hosting change, so it was deliberately left untouched. The 7.4 KiB compressed stylesheet also remains render-blocking because it is the page's critical styling; inlining or deferring it would trade a small first-render request for duplicated HTML, weaker repeat caching or a flash of unstyled content.
+
 ## Local preview
 
 ```

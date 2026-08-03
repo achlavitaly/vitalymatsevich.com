@@ -53,6 +53,8 @@ The hero pairs the positioning statement with one Fox and Raven product mockup. 
 
 The portfolio gallery is asymmetrical on larger screens and becomes one continuous column on phones. Captions describe the commercial role of each asset rather than decorating it with aesthetic language.
 
+The full-width storefront caption keeps its label and explanation on opposite sides of one evidence line. The three smaller gallery pieces stack the explanation below the notation label and align both to the reading edge. This prevents narrow cards from turning short evidence statements into right-aligned text blocks while preserving the wide-card treatment where it has enough room.
+
 **The portrait is centred on phones and ratio-driven below 1040px.** An explicit height plus a full-width column letterboxes a square source; `height: auto` lets the declared 4:5 ratio take over.
 
 ## Do not

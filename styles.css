@@ -778,6 +778,24 @@ h1 span {
   text-align: end;
 }
 
+.creative-piece:not(.creative-piece--storefront) figcaption {
+  display: block;
+}
+
+.creative-piece:not(.creative-piece--storefront) .creative-caption-label,
+.creative-piece:not(.creative-piece--storefront) .creative-caption-copy {
+  display: block;
+}
+
+.creative-piece:not(.creative-piece--storefront) .creative-caption-label {
+  margin-bottom: 5px;
+}
+
+.creative-piece:not(.creative-piece--storefront) .creative-caption-copy {
+  max-width: 32ch;
+  text-align: start;
+}
+
 .external-cue {
   display: inline-block;
   transition: transform 180ms var(--ease-out);
