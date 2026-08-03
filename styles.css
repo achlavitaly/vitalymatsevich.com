@@ -1184,16 +1184,20 @@ h1 span {
   line-height: 1.65;
 }
 
-.role-fit-process li:nth-child(1) { --process-index: 0; }
-.role-fit-process li:nth-child(2) { --process-index: 1; }
-.role-fit-process li:nth-child(3) { --process-index: 2; }
-.role-fit-process li:nth-child(4) { --process-index: 3; }
-.role-fit-process li:nth-child(5) { --process-index: 4; }
+.creative-system-track li:nth-child(1),
+.role-fit-process li:nth-child(1) { --sequence-index: 0; }
+.creative-system-track li:nth-child(2),
+.role-fit-process li:nth-child(2) { --sequence-index: 1; }
+.creative-system-track li:nth-child(3),
+.role-fit-process li:nth-child(3) { --sequence-index: 2; }
+.creative-system-track li:nth-child(4),
+.role-fit-process li:nth-child(4) { --sequence-index: 3; }
+.role-fit-process li:nth-child(5) { --sequence-index: 4; }
 
-@keyframes process-step-enter {
+@keyframes sequence-step-enter {
   from {
-    opacity: 0.24;
-    transform: translateY(12px);
+    opacity: 0.68;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -1201,35 +1205,34 @@ h1 span {
   }
 }
 
-@keyframes process-note-enter {
+@keyframes sequence-note-enter {
   from {
-    opacity: 0;
-    transform: translateY(8px);
+    opacity: 0.72;
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .motion-ready .creative-system-track li,
   .motion-ready .role-fit-process li {
-    opacity: 0.24;
-    transform: translateY(12px);
-  }
-
-  .motion-ready .role-fit-process > p {
-    opacity: 0;
+    opacity: 0.68;
     transform: translateY(8px);
   }
 
+  .motion-ready .role-fit-process > p {
+    opacity: 0.72;
+  }
+
+  .motion-ready .creative-system-track.is-active li,
   .motion-ready .role-fit-process.is-active li {
-    animation: process-step-enter 720ms var(--ease-out) both;
-    animation-delay: calc(var(--process-index) * 160ms);
+    animation: sequence-step-enter 380ms var(--ease-out) both;
+    animation-delay: calc(var(--sequence-index) * 60ms);
   }
 
   .motion-ready .role-fit-process.is-active > p {
-    animation: process-note-enter 600ms var(--ease-out) 900ms both;
+    animation: sequence-note-enter 320ms var(--ease-out) 300ms both;
   }
 }
 

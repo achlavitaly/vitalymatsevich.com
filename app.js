@@ -41,19 +41,20 @@ if (evidenceLink) {
   window.addEventListener("resize", syncEvidenceTarget, { passive: true });
 }
 
-const processFlow = document.querySelector(".role-fit-process");
+const sequenceFlows = document.querySelectorAll(".creative-system-track, .role-fit-process");
 const motionAllowed = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-if (processFlow && motionAllowed && "IntersectionObserver" in window) {
+if (sequenceFlows.length === 2 && motionAllowed && "IntersectionObserver" in window) {
   document.documentElement.classList.add("motion-ready");
 
-  const processObserver = new IntersectionObserver((entries, observer) => {
-    const entry = entries[0];
-    if (!entry?.isIntersecting) return;
+  const sequenceObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
 
-    processFlow.classList.add("is-active");
-    observer.unobserve(processFlow);
+      entry.target.classList.add("is-active");
+      observer.unobserve(entry.target);
+    });
   }, { threshold: 0.35 });
 
-  processObserver.observe(processFlow);
+  sequenceFlows.forEach((sequence) => sequenceObserver.observe(sequence));
 }

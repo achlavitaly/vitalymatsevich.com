@@ -36,14 +36,14 @@ Because that section inverts the palette, anything placed on it must invert too:
 
 ## Motion
 
-The work is the authored moment. The opening composition and gallery use real commercial assets. Nothing loops or enters automatically.
+The work is the authored moment. The opening composition and gallery use real commercial assets. Nothing loops or enters automatically on initial page load. Sequential process diagrams may reveal once when they first enter the viewport.
 
 Everything else is quiet feedback: arrows translate 4px and actions scale to 97%.
 
 Rules that must hold:
 
 - Reduced motion must clear `animation-delay` as well as duration. A stagger otherwise holds elements in their start state for the full delay, which is the thing being opted out of.
-- Nothing animates layout. Transform, colour and shadow only.
+- Nothing animates layout. Opacity, transform, colour and shadow only.
 
 ## Layout
 
