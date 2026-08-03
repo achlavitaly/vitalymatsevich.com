@@ -30,6 +30,8 @@ The caption carries no date and no counts. It once claimed `Snapshot: July 9, 20
 
 Below 680 pixels the figure swaps to a portrait capture of the same dashboard. The landscape file rendered as a 141 pixel strip on a phone, which made the only third party proof on the site unreadable on the device most visitors use. The `img` element keeps the landscape `width` and `height` attributes, so the mobile breakpoint sets a matching `aspect-ratio`; without it the browser reserves the landscape box and the page jumps when the portrait file arrives.
 
+The two captures were taken on different days, so their review counts and percentages differ slightly, and the `open full screenshot` link has to follow whichever one is on screen. `app.js` reads the image's `currentSrc` and points the link at the matching full size file, which ties the behaviour to the browser's own choice instead of repeating the breakpoint in script where it could drift from the markup. Without JavaScript the link keeps its landscape target, which is the behaviour it had before. If a single capture ever replaces both files, this can go; while they differ, the link must not open a screenshot that contradicts the one above it.
+
 ## Local preview
 
 ```
