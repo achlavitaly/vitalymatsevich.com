@@ -32,7 +32,7 @@ Notation sizes come from four tokens (`--t-micro`, `--t-note`, `--t-dense`, `--t
 
 Tokens in `:root`. Copper (`--signal`) marks meaning throughout the dark field, and the contact section is the only large copper area.
 
-Because that section inverts the palette, anything placed on it must invert too: the accent action stays the filled ink button and supporting actions become outlined. A copper control on copper is invisible, and so is the default copper focus ring, which is why `.contact-section a:focus-visible` overrides it.
+Because that section inverts the palette, anything placed on it must invert too: the accent action stays the filled ink button and supporting actions become outlined. A copper control on copper is invisible, and so is the default copper focus ring, which is why `.contact-section a:focus-visible` overrides it. The contact link group owns its outer margin so buttons keep one consistent gap when they wrap.
 
 ## Motion
 

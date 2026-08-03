@@ -1340,7 +1340,7 @@ h1 span {
 }
 
 .primary-action {
-  margin-top: 26px;
+  margin-top: 0;
   padding: 14px 20px;
   color: var(--paper);
   background: var(--ink);
@@ -1350,6 +1350,7 @@ h1 span {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-top: 26px;
 }
 
 /* This section sits on --signal, so the accent action stays the filled ink
