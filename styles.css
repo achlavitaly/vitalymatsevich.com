@@ -128,7 +128,7 @@
   --space-section-compact: clamp(50px, 5vw, 72px);
   --space-heading-content: clamp(32px, 4vw, 52px);
   --space-section-mobile: 42px;
-  --space-section-mobile-supporting: 48px;
+  --space-section-mobile-related: 32px;
   --space-section-mobile-major: 56px;
 }
 
@@ -1654,7 +1654,7 @@ footer a {
 
   .hero-visual {
     width: 100%;
-    margin: 8px auto 28px;
+    margin: 8px auto 8px;
   }
 
   .hero-work--primary {
@@ -1697,7 +1697,7 @@ footer a {
   }
 
   .creative-system {
-    padding-top: var(--space-section-mobile-supporting);
+    padding-top: var(--space-section-mobile-related);
   }
 
   .creative-section,
@@ -1706,7 +1706,14 @@ footer a {
   }
 
   .about-section {
+    gap: 24px;
+    padding-top: var(--space-section-mobile-related);
     padding-bottom: 52px;
+    border-top: 1px solid var(--line);
+  }
+
+  .profile-snapshot {
+    padding-top: var(--space-section-mobile-related);
   }
 
   .section-intro {
@@ -1734,6 +1741,19 @@ footer a {
   .snapshot-heading h2,
   .role-fit-heading h2 {
     font-size: 2.4rem;
+  }
+
+  .role-fit-heading h2 {
+    font-size: 2.2rem;
+    line-height: 1.04;
+  }
+
+  .role-fit-heading > p:last-child {
+    max-width: 36ch;
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 0.96rem;
+    line-height: 1.55;
   }
 
   .snapshot-grid {
@@ -1904,7 +1924,7 @@ footer a {
   }
 
   .role-fit-table {
-    margin-top: 38px;
+    margin-top: 28px;
   }
 
   .role-fit-row--header {
@@ -1921,12 +1941,21 @@ footer a {
 
   .role-fit-row {
     grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 24px 0;
+    gap: 8px;
+    padding: 22px 0 24px;
   }
 
   .role-fit-row h3 {
-    font-size: 2rem;
+    max-width: 20ch;
+    font-size: 1.65rem;
+    line-height: 1.12;
+  }
+
+  .role-fit-row p {
+    max-width: 38ch;
+    color: var(--muted);
+    font-size: 0.96rem;
+    line-height: 1.55;
   }
 
   .role-fit-process {
@@ -1944,8 +1973,9 @@ footer a {
   }
 
   .role-fit-statement {
-    margin-top: 42px;
-    font-size: 2.45rem;
+    margin-top: 36px;
+    font-size: 2.2rem;
+    line-height: 1.05;
   }
 
   [lang="en"] .section-intro h2 span,
@@ -1954,8 +1984,10 @@ footer a {
     white-space: normal;
   }
 
-  .about-section {
-    gap: 18px;
+  .about-title h2 {
+    max-width: 18ch;
+    font-size: 2.15rem;
+    line-height: 1.06;
   }
 
   /* margin-left: auto used to shove this against the right edge of a
