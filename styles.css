@@ -1707,9 +1707,8 @@ footer a {
 
   .about-section {
     gap: 24px;
-    padding-top: var(--space-section-mobile-related);
+    padding-top: var(--space-section-mobile-major);
     padding-bottom: 52px;
-    border-top: 1px solid var(--line);
   }
 
   .profile-snapshot {
