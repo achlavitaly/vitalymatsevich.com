@@ -12,7 +12,11 @@ npx --package clean-css-cli cleancss -o styles.min.css styles.css
 
 The site self-hosts its Google Fonts subsets under `fonts/`, together with their SIL Open Font License files. This avoids an external render-blocking stylesheet while preserving the existing typography.
 
-Responsive artwork uses 480, 640, 768, and 960 pixel WebP derivatives where the source size allows it. Keep the high-resolution files without a width suffix as the source of truth, then regenerate the derivatives with ImageMagick after replacing an image. The `apple-touch-icon.png` file is a 180 by 180 PNG rendered from `favicon.svg`.
+Responsive artwork uses 480, 640, 768, and 960 pixel WebP derivatives where the source size allows it. Keep the high-resolution files without a width suffix as the source of truth, then regenerate the derivatives with ImageMagick after replacing an image, with `magick <source> -resize <width>x -quality 75 <name>-<width>.webp`. That quality setting matches the weight of the existing derivatives. The `apple-touch-icon.png` file is a 180 by 180 PNG rendered from `favicon.svg`.
+
+Three images carry extra rungs above 960, because their layout slots land between 960 pixels and the full size source. Without those rungs every screen with a device pixel ratio of 2 downloaded the original: the hero alone was 960 KB for a 520 pixel slot. The hero now has 1080 and 1440, and both wide screenshots have 1280 and 1440. When adding an image, multiply its `sizes` value by 2 and check the ladder. If the nearest candidate above that number is the unsuffixed source, the ladder needs another rung.
+
+The Etsy evidence figure deliberately keeps volatile numbers out of the page text. Review counts keep climbing and the year over year percentages keep falling, because the shop closed in July 2026 while the comparison period keeps growing. Exact counts and percentages therefore live only inside the dated screenshot, the caption carries the snapshot date and nothing else, and the body copy states the rounded down `more than 4x` claim. Replacing the screenshot does not require touching the caption.
 
 ## Local preview
 
