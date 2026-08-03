@@ -1606,6 +1606,14 @@ footer a {
     --content: calc(100% - 28px);
   }
 
+  /* The Etsy evidence figure swaps to a portrait capture below this width.
+     Its img element carries the landscape width and height attributes, so
+     without this the browser reserves a 2800 by 1100 box and the layout
+     jumps as soon as the portrait file arrives. */
+  .project-evidence:not(.project-evidence--hush) img {
+    aspect-ratio: 1440 / 2556;
+  }
+
   .hero {
     padding-top: 64px;
   }
