@@ -2194,3 +2194,41 @@ footer a {
     transform: scaleX(-1) translateX(4px);
   }
 }
+
+.video-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 260px));
+  gap: clamp(12px, 2vw, 28px);
+  margin-top: var(--space-heading-content);
+}
+
+.video-row figure {
+  margin: 0;
+}
+
+.video-row iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border: 1px solid var(--line);
+}
+
+.video-row figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 680px) {
+  .video-row {
+    grid-template-columns: repeat(3, 62vw);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .video-row figure {
+    scroll-snap-align: start;
+  }
+}
